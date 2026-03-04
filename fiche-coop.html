@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coopérative Avicole du Centre — Tondlink</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="container navbar-inner">
+    <a href="index.html" class="navbar-brand">
+      <div class="navbar-logo">T</div>
+      <span class="navbar-name">Tond<span>link</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="producteurs.html" class="active">Producteurs</a></li>
+      <li><a href="acheteurs.html">Transformateurs</a></li>
+      <li><a href="marche.html">Marché</a></li>
+      <li><a href="acheteurs.html">Acheteurs</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <a href="acheteurs.html" class="btn btn-outline btn-sm">Je suis acheteur</a>
+      <a href="producteurs.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-seedling"></i> Je suis producteur</a>
+      <button class="hamburger" id="menuToggle"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-panel">
+    <button class="mobile-nav-close" id="navClose"><i class="fa-solid fa-xmark"></i></button>
+    <div style="height:48px;"></div>
+    <a href="index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+    <a href="producteurs.html" class="active"><i class="fa-solid fa-wheat-awn"></i> Producteurs</a>
+    <a href="acheteurs.html"><i class="fa-solid fa-industry"></i> Transformateurs</a>
+    <a href="marche.html"><i class="fa-solid fa-shop"></i> Marché</a>
+    <a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a>
+  </div>
+</div>
+
+<!-- DETAIL HERO -->
+<div class="detail-hero">
+  <div class="detail-hero-img" style="background-image:url('https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=1600&q=80');"></div>
+  <div class="container detail-hero-content">
+    <!-- Breadcrumb -->
+    <div style="display:flex; align-items:center; gap:10px; color:rgba(255,255,255,.6); font-size:.82rem; margin-bottom:20px;">
+      <a href="index.html" style="color:rgba(255,255,255,.6);">Accueil</a>
+      <i class="fa-solid fa-chevron-right" style="font-size:.6rem;"></i>
+      <a href="producteurs.html" style="color:rgba(255,255,255,.6);">Producteurs</a>
+      <i class="fa-solid fa-chevron-right" style="font-size:.6rem;"></i>
+      <span style="color:white;">Coopérative Avicole du Centre</span>
+    </div>
+
+    <div style="display:flex; align-items:flex-start; gap:20px; flex-wrap:wrap;">
+      <!-- Logo -->
+      <div style="width:80px; height:80px; border-radius:18px; background:white; display:flex; align-items:center; justify-content:center; font-size:2.5rem; flex-shrink:0; box-shadow:var(--shadow);">
+        🐔
+      </div>
+      <div style="flex:1; min-width:0;">
+        <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:8px;">
+          <h1 style="color:white; margin-bottom:0;">Coopérative Avicole du Centre</h1>
+          <span class="badge badge-green"><i class="fa-solid fa-circle-check"></i> Vérifiée</span>
+        </div>
+        <p style="color:rgba(255,255,255,.78); font-size:.95rem; margin-bottom:14px;">
+          Groupement d'aviculteurs de la région Centre spécialisé dans la production de poulets de chair,
+          pintades et œufs. Partenaire Tondlink depuis 2022.
+        </p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <span class="badge badge-orange">🐔 Volaille</span>
+          <span class="badge" style="background:rgba(255,255,255,.15); color:white;">
+            <i class="fa-solid fa-location-dot"></i> Ouagadougou, Centre
+          </span>
+          <span class="badge" style="background:rgba(255,255,255,.15); color:white;">
+            <i class="fa-solid fa-users"></i> 28 membres
+          </span>
+        </div>
+      </div>
+      <!-- Action buttons -->
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:4px;">
+        <a href="tel:+22670000001" class="btn btn-gold">
+          <i class="fa-solid fa-phone"></i> Appeler
+        </a>
+        <a href="https://wa.me/22670000001" target="_blank" class="btn btn-outline-white">
+          <i class="fa-brands fa-whatsapp"></i> WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUICK STATS -->
+<div style="background:var(--white); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="detail-meta-grid">
+      <div class="detail-meta-item">
+        <div class="label">Volume / semaine</div>
+        <div class="value" style="color:var(--green);">500 kg</div>
+      </div>
+      <div class="detail-meta-item">
+        <div class="label">Nombre de membres</div>
+        <div class="value">28 aviculteurs</div>
+      </div>
+      <div class="detail-meta-item">
+        <div class="label">Partenaire depuis</div>
+        <div class="value">2022</div>
+      </div>
+      <div class="detail-meta-item">
+        <div class="label">Zone de livraison</div>
+        <div class="value">Ouaga + 50 km</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<div style="background:var(--white); position:sticky; top:68px; z-index:99; border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="tab-nav">
+      <button class="tab-nav-btn active" onclick="showTab('presentation', this)">
+        <i class="fa-solid fa-info-circle"></i> Présentation
+      </button>
+      <button class="tab-nav-btn" onclick="showTab('produits', this)">
+        <i class="fa-solid fa-box"></i> Produits & offres
+      </button>
+      <button class="tab-nav-btn" onclick="showTab('contact', this)">
+        <i class="fa-solid fa-phone"></i> Contact
+      </button>
+      <button class="tab-nav-btn" onclick="showTab('localisation', this)">
+        <i class="fa-solid fa-map"></i> Localisation
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- TAB CONTENT -->
+<section class="section">
+  <div class="container">
+    <div style="display:grid; grid-template-columns:1fr 320px; gap:36px; align-items:start;" id="detailLayout">
+
+      <!-- LEFT CONTENT -->
+      <div>
+
+        <!-- PRESENTATION tab -->
+        <div class="tab-panel active" id="tab-presentation">
+          <div style="margin-bottom:32px;">
+            <h2 style="margin-bottom:14px;">À propos de la coopérative</h2>
+            <p class="text-mid" style="line-height:1.8; margin-bottom:16px;">
+              La Coopérative Avicole du Centre (CAC) regroupe 28 éleveurs de volaille implantés dans
+              l'arrondissement de Boulmiougou à Ouagadougou. Fondée en 2017, elle est l'une des
+              premières structures avicoles à avoir rejoint le réseau Tondlink.
+            </p>
+            <p class="text-mid" style="line-height:1.8; margin-bottom:16px;">
+              La CAC élève principalement des poulets de chair de race améliorée (Arbor Acres),
+              des pintades locales et produit des œufs de consommation. Ses membres bénéficient
+              d'un encadrement technique de la DRAP Centre et d'un accès groupé aux intrants
+              (aliments, médicaments vétérinaires).
+            </p>
+            <p class="text-mid" style="line-height:1.8;">
+              La coopérative peut livrer en vif ou en carcasse selon la demande du client.
+              Les livraisons sont possibles sur Ouagadougou et dans un rayon de 50 km.
+            </p>
+          </div>
+
+          <!-- Key points -->
+          <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-bottom:32px;">
+            <div style="display:flex; gap:12px; align-items:flex-start; padding:16px; background:var(--green-pale); border-radius:var(--radius-sm);">
+              <div style="font-size:1.4rem; flex-shrink:0;">✅</div>
+              <div><div style="font-weight:600; font-size:.88rem; margin-bottom:4px;">Qualité certifiée</div><div style="font-size:.82rem; color:var(--text-mid);">Suivi vétérinaire régulier, vaccinations à jour</div></div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start; padding:16px; background:var(--green-pale); border-radius:var(--radius-sm);">
+              <div style="font-size:1.4rem; flex-shrink:0;">🚚</div>
+              <div><div style="font-weight:600; font-size:.88rem; margin-bottom:4px;">Livraison possible</div><div style="font-size:.82rem; color:var(--text-mid);">Ouagadougou et rayon 50 km, à négocier</div></div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start; padding:16px; background:var(--green-pale); border-radius:var(--radius-sm);">
+              <div style="font-size:1.4rem; flex-shrink:0;">📦</div>
+              <div><div style="font-weight:600; font-size:.88rem; margin-bottom:4px;">Vif ou carcasse</div><div style="font-size:.82rem; color:var(--text-mid);">Selon votre besoin, abattage sur place possible</div></div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start; padding:16px; background:var(--green-pale); border-radius:var(--radius-sm);">
+              <div style="font-size:1.4rem; flex-shrink:0;">🤝</div>
+              <div><div style="font-weight:600; font-size:.88rem; margin-bottom:4px;">Contrat possible</div><div style="font-size:.82rem; color:var(--text-mid);">Approvisionnement régulier sur contrat annuel</div></div>
+            </div>
+          </div>
+
+          <!-- Gallery -->
+          <div>
+            <h3 style="margin-bottom:16px;">Galerie</h3>
+            <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px;">
+              <img src="https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=400&q=75" alt="Poulets" style="border-radius:var(--radius-sm); height:120px; object-fit:cover; width:100%; cursor:pointer;" onclick="openLightbox(this.src)">
+              <img src="https://images.unsplash.com/photo-1612170153139-6f881ff067e0?w=400&q=75" alt="Pintades" style="border-radius:var(--radius-sm); height:120px; object-fit:cover; width:100%; cursor:pointer;" onclick="openLightbox(this.src)">
+              <img src="https://images.unsplash.com/photo-1569183222790-2f2be3d57e44?w=400&q=75" alt="Élevage" style="border-radius:var(--radius-sm); height:120px; object-fit:cover; width:100%; cursor:pointer;" onclick="openLightbox(this.src)">
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUITS tab -->
+        <div class="tab-panel" id="tab-produits">
+          <h2 style="margin-bottom:8px;">Produits disponibles</h2>
+          <p class="text-mid" style="margin-bottom:24px;">
+            Contactez la coopérative pour confirmer les disponibilités actuelles.
+          </p>
+          <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; margin-bottom:28px;">
+            <div style="padding:14px 20px; background:var(--green-pale); font-weight:700; font-size:.88rem; color:var(--green-dark); display:flex; justify-content:space-between;">
+              <span>Produit</span>
+              <span style="display:flex; gap:60px;">
+                <span>Prix indicatif</span>
+                <span>Volume dispo</span>
+              </span>
+            </div>
+
+            <div class="product-row" style="padding:14px 20px;">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <span style="font-size:1.5rem;">🐔</span>
+                <div><div style="font-weight:600;">Poulet de chair (vif)</div><div style="font-size:.8rem; color:var(--text-light);">Arbor Acres, 1,8–2,2 kg</div></div>
+              </div>
+              <div style="display:flex; gap:40px; align-items:center;">
+                <div style="font-weight:700; color:var(--green); min-width:90px; text-align:right;">2 500 F / kg</div>
+                <div style="font-size:.85rem; color:var(--text-mid); min-width:80px; text-align:right;">200 kg/sem</div>
+              </div>
+            </div>
+
+            <div class="product-row" style="padding:14px 20px;">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <span style="font-size:1.5rem;">🍗</span>
+                <div><div style="font-weight:600;">Poulet de chair (carcasse)</div><div style="font-size:.8rem; color:var(--text-light);">Éviscéré, net, prêt à cuire</div></div>
+              </div>
+              <div style="display:flex; gap:40px; align-items:center;">
+                <div style="font-weight:700; color:var(--green); min-width:90px; text-align:right;">3 200 F / kg</div>
+                <div style="font-size:.85rem; color:var(--text-mid); min-width:80px; text-align:right;">150 kg/sem</div>
+              </div>
+            </div>
+
+            <div class="product-row" style="padding:14px 20px;">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <span style="font-size:1.5rem;">🐦</span>
+                <div><div style="font-weight:600;">Pintade locale (vivante)</div><div style="font-size:.8rem; color:var(--text-light);">Race locale, 1,2–1,5 kg</div></div>
+              </div>
+              <div style="display:flex; gap:40px; align-items:center;">
+                <div style="font-weight:700; color:var(--green); min-width:90px; text-align:right;">3 000 F / pièce</div>
+                <div style="font-size:.85rem; color:var(--text-mid); min-width:80px; text-align:right;">100/sem</div>
+              </div>
+            </div>
+
+            <div class="product-row" style="padding:14px 20px;">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <span style="font-size:1.5rem;">🥚</span>
+                <div><div style="font-weight:600;">Œufs de consommation</div><div style="font-size:.8rem; color:var(--text-light);">Calibre moyen, plateau de 30</div></div>
+              </div>
+              <div style="display:flex; gap:40px; align-items:center;">
+                <div style="font-weight:700; color:var(--green); min-width:90px; text-align:right;">2 500 F / plateau</div>
+                <div style="font-size:.85rem; color:var(--text-mid); min-width:80px; text-align:right;">500 plat./sem</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Offre spéciale -->
+          <div style="background:linear-gradient(135deg, var(--gold-light), #FFF8E1); border:1px solid #FBBF24; border-radius:var(--radius); padding:20px;">
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="font-size:1.8rem;">⭐</span>
+              <div>
+                <div style="font-weight:700; margin-bottom:6px;">Offre groupée disponible</div>
+                <p style="font-size:.88rem; color:var(--text-mid); margin-bottom:12px;">
+                  Pour toute commande de plus de 100 kg, bénéficiez d'une réduction de 5% et
+                  d'une livraison gratuite à Ouagadougou.
+                </p>
+                <a href="tel:+22670000001" class="btn btn-gold btn-sm">
+                  <i class="fa-solid fa-phone"></i> Négocier une commande groupée
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONTACT tab -->
+        <div class="tab-panel" id="tab-contact">
+          <h2 style="margin-bottom:20px;">Coordonnées de la coopérative</h2>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:28px;">
+            <div class="contact-info-card">
+              <div class="contact-info-icon"><i class="fa-solid fa-user"></i></div>
+              <div>
+                <div class="fw-600">Président</div>
+                <div class="text-mid text-sm">Moussa Kaboré</div>
+              </div>
+            </div>
+            <div class="contact-info-card">
+              <div class="contact-info-icon"><i class="fa-solid fa-phone"></i></div>
+              <div>
+                <div class="fw-600">Téléphone principal</div>
+                <a href="tel:+22670000001" style="color:var(--green); font-size:.9rem;">+226 70 00 00 01</a>
+              </div>
+            </div>
+            <div class="contact-info-card">
+              <div class="contact-info-icon" style="background:#E7F9ED; color:#25D366;">
+                <i class="fa-brands fa-whatsapp"></i>
+              </div>
+              <div>
+                <div class="fw-600">WhatsApp</div>
+                <a href="https://wa.me/22670000001" target="_blank" style="color:var(--green); font-size:.9rem;">+226 70 00 00 01</a>
+              </div>
+            </div>
+            <div class="contact-info-card">
+              <div class="contact-info-icon"><i class="fa-solid fa-location-dot"></i></div>
+              <div>
+                <div class="fw-600">Adresse</div>
+                <div class="text-mid text-sm">Sector 28, Boulmiougou<br>Ouagadougou</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tondlink contact box -->
+          <div style="background:var(--green-pale); border-radius:var(--radius); padding:20px; border:1px solid rgba(45,122,58,.2);">
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <div style="font-size:1.8rem;">🤝</div>
+              <div>
+                <div style="font-weight:700; color:var(--green-dark); margin-bottom:6px;">Passez par Tondlink</div>
+                <p style="font-size:.88rem; color:var(--text-mid); margin-bottom:12px;">
+                  Vous souhaitez être mis en relation avec cette coopérative via notre équipe ?
+                  Contactez-nous et nous faciliterons la transaction.
+                </p>
+                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                  <a href="tel:+22670000000" class="btn btn-primary btn-sm">
+                    <i class="fa-solid fa-phone"></i> Tondlink : +226 70 00 00 00
+                  </a>
+                  <a href="https://wa.me/22670000000" target="_blank" class="btn btn-outline btn-sm">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Tondlink
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LOCALISATION tab -->
+        <div class="tab-panel" id="tab-localisation">
+          <h2 style="margin-bottom:8px;">Localisation</h2>
+          <p class="text-mid" style="margin-bottom:20px;">Secteur 28, Boulmiougou — Ouagadougou, Province du Kadiogo, Région Centre</p>
+
+          <!-- Map placeholder -->
+          <div style="background:linear-gradient(135deg, var(--green-pale), #C8E6C9); border-radius:var(--radius); height:300px; display:flex; align-items:center; justify-content:center; border:1px solid rgba(45,122,58,.2); margin-bottom:20px; position:relative; overflow:hidden;">
+            <div style="text-align:center;">
+              <i class="fa-solid fa-map-location-dot" style="font-size:3rem; color:var(--green); display:block; margin-bottom:12px;"></i>
+              <div style="font-weight:600; color:var(--green-dark);">Secteur 28, Boulmiougou</div>
+              <div style="font-size:.85rem; color:var(--text-mid); margin:6px 0;">Ouagadougou — 12°21'N, 1°31'O</div>
+              <a href="https://maps.google.com/?q=Boulmiougou+Ouagadougou" target="_blank" class="btn btn-outline btn-sm" style="margin-top:8px;">
+                <i class="fa-solid fa-external-link"></i> Ouvrir dans Maps
+              </a>
+            </div>
+            <!-- Decorative dots -->
+            <div style="position:absolute; top:20px; right:30px; width:8px; height:8px; background:var(--green); border-radius:50%; opacity:.4;"></div>
+            <div style="position:absolute; bottom:40px; left:60px; width:6px; height:6px; background:var(--green); border-radius:50%; opacity:.3;"></div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+            <div style="padding:14px; background:var(--white); border:1px solid var(--border); border-radius:var(--radius-sm);">
+              <div style="font-size:.75rem; font-weight:600; color:var(--text-light); text-transform:uppercase; letter-spacing:.05em; margin-bottom:6px;">Province</div>
+              <div style="font-weight:600;">Kadiogo</div>
+            </div>
+            <div style="padding:14px; background:var(--white); border:1px solid var(--border); border-radius:var(--radius-sm);">
+              <div style="font-size:.75rem; font-weight:600; color:var(--text-light); text-transform:uppercase; letter-spacing:.05em; margin-bottom:6px;">Région</div>
+              <div style="font-weight:600;">Centre</div>
+            </div>
+            <div style="padding:14px; background:var(--white); border:1px solid var(--border); border-radius:var(--radius-sm);">
+              <div style="font-size:.75rem; font-weight:600; color:var(--text-light); text-transform:uppercase; letter-spacing:.05em; margin-bottom:6px;">Commune</div>
+              <div style="font-weight:600;">Ouagadougou</div>
+            </div>
+            <div style="padding:14px; background:var(--white); border:1px solid var(--border); border-radius:var(--radius-sm);">
+              <div style="font-size:.75rem; font-weight:600; color:var(--text-light); text-transform:uppercase; letter-spacing:.05em; margin-bottom:6px;">Zone livraison</div>
+              <div style="font-weight:600;">50 km autour</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT SIDEBAR -->
+      <div style="position:sticky; top:120px;">
+        <!-- Contact card -->
+        <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius); padding:22px; margin-bottom:16px; box-shadow:var(--shadow-sm);">
+          <div style="font-weight:700; margin-bottom:16px; font-size:1rem;">Contacter la coopérative</div>
+
+          <a href="tel:+22670000001" class="btn btn-primary" style="width:100%; justify-content:center; margin-bottom:10px;">
+            <i class="fa-solid fa-phone"></i> Appeler maintenant
+          </a>
+          <a href="https://wa.me/22670000001?text=Bonjour%2C%20je%20vous%20contacte%20via%20Tondlink%20pour%20un%20renseignement%20sur%20vos%20produits." target="_blank" class="btn" style="width:100%; justify-content:center; background:#25D366; color:white; border-color:#25D366; margin-bottom:10px;">
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp
+          </a>
+          <a href="contact.html" class="btn btn-outline" style="width:100%; justify-content:center;">
+            <i class="fa-solid fa-envelope"></i> Via Tondlink
+          </a>
+
+          <div style="margin-top:16px; padding-top:16px; border-top:1px solid var(--border);">
+            <div style="font-size:.78rem; font-weight:600; color:var(--text-light); text-transform:uppercase; letter-spacing:.05em; margin-bottom:10px;">Disponibilité</div>
+            <div style="display:flex; justify-content:space-between; font-size:.83rem; margin-bottom:6px;">
+              <span>Lundi – Vendredi</span>
+              <span class="text-green fw-600">Disponible</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:.83rem; margin-bottom:6px;">
+              <span>Samedi</span>
+              <span class="text-green fw-600">Disponible</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:.83rem;">
+              <span>Dimanche</span>
+              <span class="text-mid">Sur RDV</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick info -->
+        <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius); padding:18px; margin-bottom:16px;">
+          <div style="font-weight:700; margin-bottom:14px; font-size:.92rem;">Informations clés</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:.83rem; color:var(--text-mid);">Type</span>
+              <span class="badge badge-orange">🐔 Aviculteur</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:.83rem; color:var(--text-mid);">Membres</span>
+              <span style="font-weight:600; font-size:.88rem;">28</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:.83rem; color:var(--text-mid);">Volume/sem.</span>
+              <span style="font-weight:600; font-size:.88rem; color:var(--green);">500 kg</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:.83rem; color:var(--text-mid);">Contact Tondlink</span>
+              <span class="badge badge-green">✓ Vérifié</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:.83rem; color:var(--text-mid);">WhatsApp</span>
+              <span class="badge badge-green"><i class="fa-brands fa-whatsapp"></i> Oui</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Similar coops -->
+        <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius); padding:18px;">
+          <div style="font-weight:700; margin-bottom:14px; font-size:.92rem;">Coopératives similaires</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <a href="#" style="display:flex; gap:10px; align-items:center; padding:10px; border-radius:var(--radius-sm); border:1px solid var(--border); transition:var(--transition);" onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size:1.4rem;">🐔</div>
+              <div>
+                <div style="font-weight:600; font-size:.85rem;">Aviculteurs de l'Est</div>
+                <div style="font-size:.75rem; color:var(--text-light);">Fada N'Gourma · 300 kg/sem.</div>
+              </div>
+            </a>
+            <a href="#" style="display:flex; gap:10px; align-items:center; padding:10px; border-radius:var(--radius-sm); border:1px solid var(--border); transition:var(--transition);" onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size:1.4rem;">🐔</div>
+              <div>
+                <div style="font-weight:600; font-size:.85rem;">Coop. Avicole du Houet</div>
+                <div style="font-size:.75rem; color:var(--text-light);">Bobo-Dioulasso · 400 kg/sem.</div>
+              </div>
+            </a>
+          </div>
+          <a href="producteurs.html" style="display:block; text-align:center; margin-top:12px; font-size:.82rem; color:var(--green); font-weight:600;">
+            Voir toutes les coopératives →
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo navbar-brand">
+          <div class="navbar-logo">T</div>
+          <span class="navbar-name">Tond<span>link</span></span>
+        </div>
+        <p class="footer-desc">Tondlink connecte producteurs agricoles, coopératives et acheteurs professionnels au Burkina Faso.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="producteurs.html">Producteurs</a></li>
+          <li><a href="acheteurs.html">Acheteurs</a></li>
+          <li><a href="marche.html">Marché</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Filières</h4>
+        <ul>
+          <li><a href="#">Volaille</a></li>
+          <li><a href="#">Céréales</a></li>
+          <li><a href="#">Maraîchage</a></li>
+          <li><a href="#">Oléagineux</a></li>
+          <li><a href="#">Fruits</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item"><i class="fa-solid fa-location-dot"></i><span>Ouagadougou, Burkina Faso</span></div>
+        <div class="footer-contact-item"><i class="fa-solid fa-phone"></i><span>+226 70 00 00 00</span></div>
+        <div class="footer-contact-item"><i class="fa-brands fa-whatsapp"></i><span>+226 70 00 00 00</span></div>
+        <div class="footer-contact-item"><i class="fa-solid fa-envelope"></i><span>contact@tondlink.bf</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Tondlink — Tous droits réservés</span>
+      <div style="display:flex; gap:16px;"><a href="#">Mentions légales</a><a href="#">Confidentialité</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<div id="lightbox" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.88); z-index:9999; align-items:center; justify-content:center;" onclick="closeLightbox()">
+  <img id="lightboxImg" src="" alt="" style="max-width:90vw; max-height:90vh; border-radius:var(--radius); box-shadow:var(--shadow-lg);">
+  <button onclick="closeLightbox()" style="position:absolute; top:20px; right:20px; background:rgba(255,255,255,.15); border:none; color:white; width:44px; height:44px; border-radius:50%; font-size:1.2rem; cursor:pointer;">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+</div>
+
+<a href="https://wa.me/22670000000" target="_blank" class="wa-float">
+  <i class="fa-brands fa-whatsapp"></i>
+  <span class="wa-tooltip">Contacter Tondlink</span>
+</a>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fa-solid fa-chevron-up"></i>
+</button>
+
+<div class="toast" id="toast"><i class="fa-solid fa-circle-check"></i><span id="toastMsg"></span></div>
+
+<style>
+@media (max-width: 768px) {
+  #detailLayout { grid-template-columns: 1fr !important; }
+}
+.contact-info-card { display:flex; align-items:flex-start; gap:14px; padding:14px 16px; background:var(--sand); border:1px solid var(--border); border-radius:var(--radius-sm); }
+.contact-info-icon { width:40px; height:40px; border-radius:10px; background:var(--green-pale); color:var(--green); display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
+</style>
+
+<script>
+function showTab(tabId, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tabId).classList.add('active');
+  btn.classList.add('active');
+}
+function openLightbox(src) {
+  document.getElementById('lightbox').style.display = 'flex';
+  document.getElementById('lightboxImg').src = src;
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').style.display = 'none';
+  document.body.style.overflow = '';
+}
+</script>
+<script src="app.js"></script>
+</body>
+</html>

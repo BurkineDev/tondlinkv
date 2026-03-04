@@ -2,6 +2,57 @@
    TONDLINK — Main JavaScript
    ============================================================ */
 
+// ── Scroll Reveal (Intersection Observer) ───────────────────
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// Auto-add reveal class to cards if not set (progressive enhancement)
+document.querySelectorAll('.offer-card, .coop-card, .buyer-card, .feature-card, .step-card, .testimonial-card').forEach((el, i) => {
+  if (!el.classList.contains('reveal')) {
+    el.classList.add('reveal');
+    if (i % 3 === 1) el.classList.add('reveal-delay-1');
+    if (i % 3 === 2) el.classList.add('reveal-delay-2');
+    revealObserver.observe(el);
+  }
+});
+
+// ── Animated Counters ─────────────────────────────────────────
+function animateCounter(el, target, suffix = '') {
+  const duration = 1800;
+  const start = performance.now();
+  const update = (time) => {
+    const elapsed = time - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+    const current = Math.round(eased * target);
+    el.textContent = current.toLocaleString('fr-FR') + suffix;
+    if (progress < 1) requestAnimationFrame(update);
+  };
+  requestAnimationFrame(update);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const raw = el.dataset.count;
+      const suffix = el.dataset.suffix || '';
+      if (raw) animateCounter(el, parseInt(raw), suffix);
+      counterObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.4 });
+
+document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+
 // ── Navbar hamburger ────────────────────────────────────────
 const menuToggle = document.getElementById('menuToggle');
 const mobileNav  = document.getElementById('mobileNav');
@@ -281,12 +332,66 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// ── Navbar scroll effect ──────────────────────────────────────
+// ── Navbar scroll effect + back-to-top ───────────────────────
 window.addEventListener('scroll', () => {
   const navbar = document.querySelector('.navbar');
   if (navbar) {
     navbar.style.boxShadow = window.scrollY > 10
       ? '0 2px 20px rgba(0,0,0,.12)'
       : '0 1px 3px rgba(0,0,0,.08)';
+  }
+
+  const backBtn = document.getElementById('backToTop');
+  if (backBtn) {
+    backBtn.classList.toggle('show', window.scrollY > 400);
+  }
+});
+
+// ── Active nav link by current page ──────────────────────────
+(function () {
+  const path = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    const href = a.getAttribute('href');
+    if (href === path) {
+      a.classList.add('active');
+    } else if (path !== 'index.html') {
+      a.classList.remove('active');
+    }
+  });
+})();
+
+// ── Image lazy loading with native + fallback ─────────────────
+if ('loading' in HTMLImageElement.prototype) {
+  document.querySelectorAll('img:not([loading])').forEach(img => {
+    img.setAttribute('loading', 'lazy');
+  });
+}
+
+// ── Search highlight helper ───────────────────────────────────
+function highlightText(text, query) {
+  if (!query) return text;
+  const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return text.replace(new RegExp(escaped, 'gi'), m => `<span class="highlight">${m}</span>`);
+}
+
+// ── Keyboard shortcut: "/" to focus search ───────────────────
+document.addEventListener('keydown', (e) => {
+  if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+    e.preventDefault();
+    const inputs = [
+      document.getElementById('marcheSearch'),
+      document.getElementById('coopSearch'),
+      document.getElementById('buyerSearch'),
+      document.getElementById('heroSearch'),
+    ];
+    const activeInput = inputs.find(i => i);
+    if (activeInput) {
+      activeInput.focus();
+      activeInput.select();
+    }
+  }
+  // Escape to close mobile nav
+  if (e.key === 'Escape') {
+    document.getElementById('mobileNav')?.classList.remove('open');
   }
 });

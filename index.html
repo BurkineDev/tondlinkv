@@ -94,10 +94,10 @@
     </div>
 
     <div class="hero-stats">
-      <div class="hero-stat"><strong>120+</strong><span>Coopératives</span></div>
-      <div class="hero-stat"><strong>45</strong><span>Provinces</span></div>
-      <div class="hero-stat"><strong>300+</strong><span>Acheteurs</span></div>
-      <div class="hero-stat"><strong>18</strong><span>Filières</span></div>
+      <div class="hero-stat"><strong><span data-count="120" data-suffix="+">120+</span></strong><span>Coopératives</span></div>
+      <div class="hero-stat"><strong><span data-count="45">45</span></strong><span>Provinces</span></div>
+      <div class="hero-stat"><strong><span data-count="300" data-suffix="+">300+</span></strong><span>Acheteurs</span></div>
+      <div class="hero-stat"><strong><span data-count="18">18</span></strong><span>Filières</span></div>
     </div>
   </div>
 </section>
@@ -148,10 +148,10 @@
 <!-- ═══════════════════ STATS STRIP ═══════════════════ -->
 <div class="stats-strip">
   <div class="container" style="display:flex; width:100%;">
-    <div class="stat-item"><strong>120+</strong><span>Coopératives partenaires</span></div>
-    <div class="stat-item"><strong>300+</strong><span>Acheteurs & transformateurs</span></div>
-    <div class="stat-item"><strong>18</strong><span>Filières couvertes</span></div>
-    <div class="stat-item"><strong>45</strong><span>Provinces du Burkina</span></div>
+    <div class="stat-item"><strong><span data-count="120" data-suffix="+">120+</span></strong><span>Coopératives partenaires</span></div>
+    <div class="stat-item"><strong><span data-count="300" data-suffix="+">300+</span></strong><span>Acheteurs & transformateurs</span></div>
+    <div class="stat-item"><strong><span data-count="18">18</span></strong><span>Filières couvertes</span></div>
+    <div class="stat-item"><strong><span data-count="45">45</span></strong><span>Provinces du Burkina</span></div>
   </div>
 </div>
 
@@ -404,6 +404,76 @@
   </div>
 </section>
 
+<!-- ═══════════════════ PARTENAIRES ═══════════════════ -->
+<div class="partners-strip">
+  <div class="container">
+    <p class="text-sm text-light text-center" style="margin-bottom:20px; text-transform:uppercase; letter-spacing:.08em; font-weight:600;">Ils nous font confiance</p>
+    <div class="partners-logos">
+      <div class="partner-logo"><div class="partner-logo-icon">🌾</div> FAARF</div>
+      <div class="partner-logo"><div class="partner-logo-icon">🏛️</div> DRAP Centre</div>
+      <div class="partner-logo"><div class="partner-logo-icon">🤝</div> SOS Faim</div>
+      <div class="partner-logo"><div class="partner-logo-icon">🌍</div> FAO Burkina</div>
+      <div class="partner-logo"><div class="partner-logo-icon">📦</div> APME²A</div>
+      <div class="partner-logo"><div class="partner-logo-icon">💰</div> FONDS PNUD</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ TÉMOIGNAGES ═══════════════════ -->
+<section class="section" style="background:var(--sand);">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="eyebrow">Témoignages</span>
+      <h2>Ce qu'ils disent de Tondlink</h2>
+      <p>Producteurs et acheteurs partagent leur expérience avec notre plateforme.</p>
+    </div>
+    <div class="grid-3" style="margin-top:36px;">
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">
+          Avant Tondlink, on cherchait des acheteurs pendant des semaines. Maintenant,
+          on est contacté directement par des restaurateurs et grossistes. Nos ventes ont doublé.
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">MK</div>
+          <div>
+            <div class="testimonial-name">Moussa Kaboré</div>
+            <div class="testimonial-role">Président — Coop. Avicole du Centre</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">
+          En tant qu'acheteur, je trouve des fournisseurs fiables avec les volumes dont j'ai besoin.
+          La mise en relation par WhatsApp est vraiment pratique pour négocier directement.
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background:var(--gold);">AS</div>
+          <div>
+            <div class="testimonial-name">Awa Sawadogo</div>
+            <div class="testimonial-role">Directrice — FasoMarket</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-2">
+        <div class="stars">★★★★☆</div>
+        <p class="testimonial-text">
+          Notre unité de transformation avait du mal à s'approvisionner régulièrement en céréales.
+          Tondlink nous a mis en contact avec 3 coopératives fiables dans notre région.
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background:#1565C0;">IZ</div>
+          <div>
+            <div class="testimonial-name">Ibrahim Zongo</div>
+            <div class="testimonial-role">Gérant — Minoterie Centrale</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════════════════ CTA ═══════════════════ -->
 <section class="cta-section">
   <div class="container" style="position:relative;z-index:1;">
@@ -491,6 +561,15 @@
 </footer>
 
 <!-- ═══════════════════ TOAST ═══════════════════ -->
+<!-- Floating buttons -->
+<a href="https://wa.me/22670000000" target="_blank" class="wa-float" aria-label="Contact WhatsApp">
+  <i class="fa-brands fa-whatsapp"></i>
+  <span class="wa-tooltip">Contacter Tondlink</span>
+</a>
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Retour en haut">
+  <i class="fa-solid fa-chevron-up"></i>
+</button>
+
 <div class="toast" id="toast">
   <i class="fa-solid fa-circle-check"></i>
   <span id="toastMsg"></span>
