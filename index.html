@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tondlink — Connecter Producteurs & Acheteurs au Burkina Faso</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- ═══════════════════ NAVBAR ═══════════════════ -->
+<nav class="navbar">
+  <div class="container navbar-inner">
+    <a href="index.html" class="navbar-brand">
+      <div class="navbar-logo">T</div>
+      <span class="navbar-name">Tond<span>link</span></span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Accueil</a></li>
+      <li><a href="producteurs.html">Producteurs</a></li>
+      <li><a href="acheteurs.html">Transformateurs</a></li>
+      <li><a href="marche.html">Marché</a></li>
+      <li><a href="acheteurs.html">Acheteurs</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <div class="navbar-actions">
+      <a href="acheteurs.html" class="btn btn-outline btn-sm">
+        <i class="fa-solid fa-store"></i> Je suis acheteur
+      </a>
+      <a href="producteurs.html" class="btn btn-primary btn-sm">
+        <i class="fa-solid fa-seedling"></i> Je suis producteur
+      </a>
+      <button class="hamburger" id="menuToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-panel">
+    <button class="mobile-nav-close" id="navClose"><i class="fa-solid fa-xmark"></i></button>
+    <div style="height:48px;"></div>
+    <a href="index.html" class="active"><i class="fa-solid fa-house"></i> Accueil</a>
+    <a href="producteurs.html"><i class="fa-solid fa-wheat-awn"></i> Producteurs</a>
+    <a href="acheteurs.html"><i class="fa-solid fa-industry"></i> Transformateurs</a>
+    <a href="marche.html"><i class="fa-solid fa-shop"></i> Marché</a>
+    <a href="acheteurs.html"><i class="fa-solid fa-handshake"></i> Acheteurs</a>
+    <a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a>
+    <div style="margin-top:8px; display:flex; flex-direction:column; gap:8px;">
+      <a href="acheteurs.html" class="btn btn-outline btn-sm">Je suis acheteur</a>
+      <a href="producteurs.html" class="btn btn-primary btn-sm">Je suis producteur</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section class="hero">
+  <div class="container hero-content">
+    <div class="hero-eyebrow">
+      <i class="fa-solid fa-leaf"></i>
+      Plateforme agricole #1 au Burkina Faso
+    </div>
+    <h1>Connectez <em>producteurs</em> et acheteurs agricoles</h1>
+    <p class="hero-sub">
+      Plateforme simple pour coopératives, entreprises et acheteurs professionnels.
+      Accédez aux meilleures productions locales directement à la source.
+    </p>
+
+    <div class="search-bar" role="search">
+      <i class="fa-solid fa-magnifying-glass" style="color:#718096; margin-right:4px;"></i>
+      <input
+        type="text"
+        id="heroSearch"
+        placeholder="Que cherchez-vous ? (ex : poulet, maïs, oignon…)"
+        autocomplete="off"
+      >
+      <button class="btn btn-primary" onclick="doHeroSearch()">
+        <i class="fa-solid fa-search"></i> Rechercher
+      </button>
+    </div>
+
+    <div class="hero-ctas">
+      <a href="acheteurs.html" class="btn btn-gold btn-lg">
+        <i class="fa-solid fa-cart-shopping"></i> Je suis acheteur
+      </a>
+      <a href="producteurs.html" class="btn btn-outline-white btn-lg">
+        <i class="fa-solid fa-tractor"></i> Je suis producteur / coopérative
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat"><strong>120+</strong><span>Coopératives</span></div>
+      <div class="hero-stat"><strong>45</strong><span>Provinces</span></div>
+      <div class="hero-stat"><strong>300+</strong><span>Acheteurs</span></div>
+      <div class="hero-stat"><strong>18</strong><span>Filières</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ FEATURES ═══════════════════ -->
+<section class="section" style="background:var(--white);">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="eyebrow">Pourquoi Tondlink ?</span>
+      <h2>Tout ce dont vous avez besoin</h2>
+      <p>Une seule plateforme pour connecter, négocier et finaliser vos transactions agricoles.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🌾</div>
+        <h3>Répertoire de coopératives</h3>
+        <p>Accédez à plus de 120 coopératives certifiées à travers tout le Burkina Faso.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📲</div>
+        <h3>Mise en relation directe</h3>
+        <p>Contactez producteurs et acheteurs via WhatsApp ou appel téléphonique en un clic.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏪</div>
+        <h3>Marché en ligne</h3>
+        <p>Consultez les offres du moment avec prix, volumes disponibles et région.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤝</div>
+        <h3>Acheteurs & transformateurs</h3>
+        <p>Trouvez des débouchés professionnels pour écouler votre production agricole.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📍</div>
+        <h3>Géolocalisation</h3>
+        <p>Filtrez par région, province et commune pour trouver les partenaires proches de vous.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Fiches vérifiées</h3>
+        <p>Toutes les fiches producteurs et acheteurs sont vérifiées par l'équipe Tondlink.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ STATS STRIP ═══════════════════ -->
+<div class="stats-strip">
+  <div class="container" style="display:flex; width:100%;">
+    <div class="stat-item"><strong>120+</strong><span>Coopératives partenaires</span></div>
+    <div class="stat-item"><strong>300+</strong><span>Acheteurs & transformateurs</span></div>
+    <div class="stat-item"><strong>18</strong><span>Filières couvertes</span></div>
+    <div class="stat-item"><strong>45</strong><span>Provinces du Burkina</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════ OFFRES DU MOMENT ═══════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="flex-between section-header" style="margin-bottom:28px;">
+      <div>
+        <span class="eyebrow">Offres récentes</span>
+        <h2 style="margin-bottom:0;">Offres du moment</h2>
+      </div>
+      <a href="marche.html" class="btn btn-outline btn-sm">
+        Voir tout <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+
+    <!-- Filters -->
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:24px;">
+      <button class="filter-chip active" data-filter="all">Tout</button>
+      <button class="filter-chip" data-filter="volaille">🐔 Volaille</button>
+      <button class="filter-chip" data-filter="cereales">🌽 Céréales</button>
+      <button class="filter-chip" data-filter="maraichage">🥬 Maraîchage</button>
+      <button class="filter-chip" data-filter="oleagineux">🌻 Oléagineux</button>
+    </div>
+
+    <div class="grid-3" id="offersGrid">
+      <!-- Card 1 -->
+      <div class="offer-card" data-cat="volaille">
+        <div class="offer-card-img">
+          <img src="https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=600&q=80" alt="Poulets de chair">
+        </div>
+        <div class="offer-card-body">
+          <div class="offer-card-header">
+            <div>
+              <span class="badge badge-orange">🐔 Volaille</span>
+              <h3 style="margin-top:8px;">Poulets de chair</h3>
+            </div>
+            <div style="text-align:right;">
+              <div class="price">1 500 F <span>/ kg</span></div>
+            </div>
+          </div>
+          <div class="offer-meta">
+            <div class="offer-meta-row"><i class="fa-solid fa-box"></i> Volume disponible : <strong>500 kg</strong></div>
+            <div class="offer-meta-row"><i class="fa-solid fa-location-dot"></i> Ouagadougou, Kadiogo</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-building"></i> Coopérative Avicole du Centre</div>
+          </div>
+          <div class="offer-card-footer">
+            <a href="tel:+22670000001" class="btn btn-primary btn-sm" style="flex:1; justify-content:center;">
+              <i class="fa-solid fa-phone"></i> Contacter
+            </a>
+            <a href="https://wa.me/22670000001" target="_blank" class="btn btn-outline btn-sm">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="offer-card" data-cat="maraichage">
+        <div class="offer-card-img">
+          <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=600&q=80" alt="Tomates fraîches">
+        </div>
+        <div class="offer-card-body">
+          <div class="offer-card-header">
+            <div>
+              <span class="badge badge-red">🍅 Maraîchage</span>
+              <h3 style="margin-top:8px;">Tomates fraîches</h3>
+            </div>
+            <div style="text-align:right;">
+              <div class="price">200 F <span>/ kg</span></div>
+            </div>
+          </div>
+          <div class="offer-meta">
+            <div class="offer-meta-row"><i class="fa-solid fa-box"></i> Volume disponible : <strong>2 tonnes</strong></div>
+            <div class="offer-meta-row"><i class="fa-solid fa-location-dot"></i> Bobo-Dioulasso, Houet</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-building"></i> Coop. Maraîchère de l'Ouest</div>
+          </div>
+          <div class="offer-card-footer">
+            <a href="tel:+22670000002" class="btn btn-primary btn-sm" style="flex:1; justify-content:center;">
+              <i class="fa-solid fa-phone"></i> Contacter
+            </a>
+            <a href="https://wa.me/22670000002" target="_blank" class="btn btn-outline btn-sm">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="offer-card" data-cat="cereales">
+        <div class="offer-card-img">
+          <img src="https://images.unsplash.com/photo-1601593346740-925612772716?w=600&q=80" alt="Maïs">
+        </div>
+        <div class="offer-card-body">
+          <div class="offer-card-header">
+            <div>
+              <span class="badge badge-gold">🌽 Céréales</span>
+              <h3 style="margin-top:8px;">Maïs grain</h3>
+            </div>
+            <div style="text-align:right;">
+              <div class="price">160 F <span>/ kg</span></div>
+            </div>
+          </div>
+          <div class="offer-meta">
+            <div class="offer-meta-row"><i class="fa-solid fa-box"></i> Volume disponible : <strong>10 tonnes</strong></div>
+            <div class="offer-meta-row"><i class="fa-solid fa-location-dot"></i> Koudougou, Boulkiemdé</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-building"></i> Union des Céréaliers du Plateau</div>
+          </div>
+          <div class="offer-card-footer">
+            <a href="tel:+22670000003" class="btn btn-primary btn-sm" style="flex:1; justify-content:center;">
+              <i class="fa-solid fa-phone"></i> Contacter
+            </a>
+            <a href="https://wa.me/22670000003" target="_blank" class="btn btn-outline btn-sm">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="offer-card" data-cat="oleagineux">
+        <div class="offer-card-img">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Sésame">
+        </div>
+        <div class="offer-card-body">
+          <div class="offer-card-header">
+            <div>
+              <span class="badge badge-teal">🌻 Oléagineux</span>
+              <h3 style="margin-top:8px;">Sésame blanc</h3>
+            </div>
+            <div style="text-align:right;">
+              <div class="price">900 F <span>/ kg</span></div>
+            </div>
+          </div>
+          <div class="offer-meta">
+            <div class="offer-meta-row"><i class="fa-solid fa-box"></i> Volume disponible : <strong>5 tonnes</strong></div>
+            <div class="offer-meta-row"><i class="fa-solid fa-location-dot"></i> Dédougou, Mouhoun</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-building"></i> Groupement Sésame Burkina</div>
+          </div>
+          <div class="offer-card-footer">
+            <a href="tel:+22670000004" class="btn btn-primary btn-sm" style="flex:1; justify-content:center;">
+              <i class="fa-solid fa-phone"></i> Contacter
+            </a>
+            <a href="https://wa.me/22670000004" target="_blank" class="btn btn-outline btn-sm">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="offer-card" data-cat="maraichage">
+        <div class="offer-card-img">
+          <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=600&q=80" alt="Oignons">
+        </div>
+        <div class="offer-card-body">
+          <div class="offer-card-header">
+            <div>
+              <span class="badge badge-purple">🧅 Maraîchage</span>
+              <h3 style="margin-top:8px;">Oignons rouges</h3>
+            </div>
+            <div style="text-align:right;">
+              <div class="price">300 F <span>/ kg</span></div>
+            </div>
+          </div>
+          <div class="offer-meta">
+            <div class="offer-meta-row"><i class="fa-solid fa-box"></i> Volume disponible : <strong>3 tonnes</strong></div>
+            <div class="offer-meta-row"><i class="fa-solid fa-location-dot"></i> Léo, Sissili</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-building"></i> Coop. Légumes du Sud</div>
+          </div>
+          <div class="offer-card-footer">
+            <a href="tel:+22670000005" class="btn btn-primary btn-sm" style="flex:1; justify-content:center;">
+              <i class="fa-solid fa-phone"></i> Contacter
+            </a>
+            <a href="https://wa.me/22670000005" target="_blank" class="btn btn-outline btn-sm">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="offer-card" data-cat="cereales">
+        <div class="offer-card-img">
+          <img src="https://images.unsplash.com/photo-1609150448989-1ad5d0a001b5?w=600&q=80" alt="Mil">
+        </div>
+        <div class="offer-card-body">
+          <div class="offer-card-header">
+            <div>
+              <span class="badge badge-gold">🌾 Céréales</span>
+              <h3 style="margin-top:8px;">Mil / Sorgho</h3>
+            </div>
+            <div style="text-align:right;">
+              <div class="price">140 F <span>/ kg</span></div>
+            </div>
+          </div>
+          <div class="offer-meta">
+            <div class="offer-meta-row"><i class="fa-solid fa-box"></i> Volume disponible : <strong>8 tonnes</strong></div>
+            <div class="offer-meta-row"><i class="fa-solid fa-location-dot"></i> Ouahigouya, Yatenga</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-building"></i> UGCPA du Nord</div>
+          </div>
+          <div class="offer-card-footer">
+            <a href="tel:+22670000006" class="btn btn-primary btn-sm" style="flex:1; justify-content:center;">
+              <i class="fa-solid fa-phone"></i> Contacter
+            </a>
+            <a href="https://wa.me/22670000006" target="_blank" class="btn btn-outline btn-sm">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:36px;">
+      <a href="marche.html" class="btn btn-primary btn-lg">
+        <i class="fa-solid fa-store"></i> Voir toutes les offres
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ COMMENT ÇA MARCHE ═══════════════════ -->
+<section class="section" style="background:var(--white);">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="eyebrow">Simple & Rapide</span>
+      <h2>Comment ça marche ?</h2>
+      <p>En 3 étapes, trouvez et contactez votre partenaire agricole idéal.</p>
+    </div>
+    <div class="grid-3" style="margin-top:40px;">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-icon">🔍</div>
+        <h3>Cherchez un produit ou une coopérative</h3>
+        <p>Utilisez la barre de recherche ou les filtres pour trouver ce dont vous avez besoin.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-icon">📋</div>
+        <h3>Consultez la fiche détaillée</h3>
+        <p>Informations complètes : volumes, prix, région, contact et coordonnées Tondlink.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-icon">🤝</div>
+        <h3>Contactez directement</h3>
+        <p>Appelez ou envoyez un WhatsApp directement pour conclure votre transaction.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ CTA ═══════════════════ -->
+<section class="cta-section">
+  <div class="container" style="position:relative;z-index:1;">
+    <span class="eyebrow" style="color:var(--gold-light); display:block; margin-bottom:10px;">Rejoignez la communauté</span>
+    <h2>Prêt à développer votre activité agricole ?</h2>
+    <p>Inscrivez votre coopérative ou trouvez vos débouchés dès aujourd'hui.</p>
+    <div class="ctas">
+      <a href="producteurs.html" class="btn btn-gold btn-lg">
+        <i class="fa-solid fa-seedling"></i> Inscrire ma coopérative
+      </a>
+      <a href="acheteurs.html" class="btn btn-outline-white btn-lg">
+        <i class="fa-solid fa-magnifying-glass"></i> Trouver des produits
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo navbar-brand">
+          <div class="navbar-logo">T</div>
+          <span class="navbar-name">Tond<span>link</span></span>
+        </div>
+        <p class="footer-desc">
+          Tondlink connecte les producteurs agricoles, coopératives et acheteurs professionnels
+          au Burkina Faso pour des transactions simples et directes.
+        </p>
+        <div class="footer-social">
+          <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="producteurs.html">Producteurs & Coopératives</a></li>
+          <li><a href="acheteurs.html">Acheteurs & Transformateurs</a></li>
+          <li><a href="marche.html">Marché agricole</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Filières</h4>
+        <ul>
+          <li><a href="#">Volaille</a></li>
+          <li><a href="#">Céréales</a></li>
+          <li><a href="#">Maraîchage</a></li>
+          <li><a href="#">Oléagineux</a></li>
+          <li><a href="#">Fruits</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Coordonnées Tondlink</h4>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>Ouagadougou, Burkina Faso</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-phone"></i>
+          <span>+226 70 00 00 00</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span>+226 70 00 00 00</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-envelope"></i>
+          <span>contact@tondlink.bf</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Tondlink — Tous droits réservés</span>
+      <div style="display:flex; gap:16px;">
+        <a href="#">Mentions légales</a>
+        <a href="#">Confidentialité</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════ TOAST ═══════════════════ -->
+<div class="toast" id="toast">
+  <i class="fa-solid fa-circle-check"></i>
+  <span id="toastMsg"></span>
+</div>
+
+<!-- Inline chips style -->
+<style>
+.filter-chip {
+  padding: 8px 18px; border-radius: 50px; border: 1.5px solid var(--border);
+  background: white; font-size: .85rem; font-weight: 500; color: var(--text-mid);
+  cursor: pointer; transition: var(--transition);
+}
+.filter-chip:hover, .filter-chip.active {
+  background: var(--green); color: white; border-color: var(--green);
+}
+</style>
+
+<script src="app.js"></script>
+</body>
+</html>

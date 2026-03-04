@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Tondlink</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="container navbar-inner">
+    <a href="index.html" class="navbar-brand">
+      <div class="navbar-logo">T</div>
+      <span class="navbar-name">Tond<span>link</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="producteurs.html">Producteurs</a></li>
+      <li><a href="acheteurs.html">Transformateurs</a></li>
+      <li><a href="marche.html">Marché</a></li>
+      <li><a href="acheteurs.html">Acheteurs</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <a href="acheteurs.html" class="btn btn-outline btn-sm">Je suis acheteur</a>
+      <a href="producteurs.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-seedling"></i> Je suis producteur</a>
+      <button class="hamburger" id="menuToggle"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-panel">
+    <button class="mobile-nav-close" id="navClose"><i class="fa-solid fa-xmark"></i></button>
+    <div style="height:48px;"></div>
+    <a href="index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+    <a href="producteurs.html"><i class="fa-solid fa-wheat-awn"></i> Producteurs</a>
+    <a href="acheteurs.html"><i class="fa-solid fa-industry"></i> Transformateurs</a>
+    <a href="marche.html"><i class="fa-solid fa-shop"></i> Marché</a>
+    <a href="contact.html" class="active"><i class="fa-solid fa-envelope"></i> Contact</a>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <div class="hero-eyebrow" style="background:rgba(255,255,255,.12); display:inline-flex; margin-bottom:14px;">
+      <i class="fa-solid fa-envelope"></i> Nous contacter
+    </div>
+    <h1>Contactez Tondlink</h1>
+    <p>Une question, une suggestion ou vous souhaitez inscrire votre coopérative ou entreprise ?
+      Notre équipe répond dans les 24h.</p>
+  </div>
+</div>
+
+<!-- CONTACT SECTION -->
+<section class="section">
+  <div class="container">
+    <div class="grid-2" style="gap:48px; align-items:start;">
+
+      <!-- Left: Form -->
+      <div>
+        <span class="eyebrow">Formulaire de contact</span>
+        <h2 style="margin-bottom:6px;">Envoyez-nous un message</h2>
+        <p class="text-mid" style="margin-bottom:28px;">Remplissez le formulaire ci-dessous et nous vous répondrons rapidement.</p>
+
+        <!-- Type selector -->
+        <div style="display:flex; gap:12px; margin-bottom:24px; flex-wrap:wrap;">
+          <label class="type-option">
+            <input type="radio" name="userType" value="producteur" checked>
+            <div class="type-card">
+              <span class="type-icon">🌾</span>
+              <span>Producteur / Coopérative</span>
+            </div>
+          </label>
+          <label class="type-option">
+            <input type="radio" name="userType" value="acheteur">
+            <div class="type-card">
+              <span class="type-icon">🏪</span>
+              <span>Acheteur / Transformateur</span>
+            </div>
+          </label>
+          <label class="type-option">
+            <input type="radio" name="userType" value="autre">
+            <div class="type-card">
+              <span class="type-icon">💬</span>
+              <span>Autre</span>
+            </div>
+          </label>
+        </div>
+
+        <form id="contactForm" onsubmit="submitContact(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nom complet *</label>
+              <input type="text" placeholder="Votre nom" required>
+            </div>
+            <div class="form-group">
+              <label>Téléphone *</label>
+              <input type="tel" placeholder="+226 70 00 00 00" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="vous@exemple.com">
+          </div>
+          <div class="form-group">
+            <label>Nom de votre structure / entreprise</label>
+            <input type="text" placeholder="Nom de la coopérative ou de l'entreprise">
+          </div>
+          <div class="form-group">
+            <label>Région *</label>
+            <select required>
+              <option value="">Sélectionnez votre région</option>
+              <option>Centre (Ouagadougou)</option>
+              <option>Hauts-Bassins (Bobo-Dioulasso)</option>
+              <option>Plateau Central</option>
+              <option>Nord (Ouahigouya)</option>
+              <option>Est (Fada N'Gourma)</option>
+              <option>Sahel (Dori)</option>
+              <option>Boucle du Mouhoun (Dédougou)</option>
+              <option>Centre-Sud (Manga)</option>
+              <option>Centre-Ouest (Koudougou)</option>
+              <option>Centre-Est (Tenkodogo)</option>
+              <option>Centre-Nord (Kaya)</option>
+              <option>Cascades (Banfora)</option>
+              <option>Sud-Ouest (Gaoua)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Sujet *</label>
+            <select required>
+              <option value="">Choisir un sujet</option>
+              <option>Inscrire ma coopérative</option>
+              <option>Inscrire mon entreprise / acheteur</option>
+              <option>Mettre une offre en ligne</option>
+              <option>Partenariat</option>
+              <option>Signaler un problème</option>
+              <option>Autre demande</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message *</label>
+            <textarea placeholder="Décrivez votre demande en détail : produit, volume, région, besoins…" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg" style="width:100%; justify-content:center;">
+            <i class="fa-solid fa-paper-plane"></i> Envoyer le message
+          </button>
+        </form>
+      </div>
+
+      <!-- Right: Info -->
+      <div>
+        <span class="eyebrow">Coordonnées</span>
+        <h2 style="margin-bottom:24px;">Nos informations de contact</h2>
+
+        <div class="contact-info-cards">
+          <div class="contact-info-card">
+            <div class="contact-info-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div>
+              <div class="fw-600">Siège social</div>
+              <div class="text-mid text-sm">Ouagadougou, Burkina Faso</div>
+            </div>
+          </div>
+          <div class="contact-info-card">
+            <div class="contact-info-icon"><i class="fa-solid fa-phone"></i></div>
+            <div>
+              <div class="fw-600">Téléphone</div>
+              <a href="tel:+22670000000" class="text-mid text-sm" style="color:var(--green);">+226 70 00 00 00</a>
+            </div>
+          </div>
+          <div class="contact-info-card">
+            <div class="contact-info-icon" style="background:#E7F9ED; color:#25D366;"><i class="fa-brands fa-whatsapp"></i></div>
+            <div>
+              <div class="fw-600">WhatsApp</div>
+              <a href="https://wa.me/22670000000" target="_blank" class="text-mid text-sm" style="color:var(--green);">+226 70 00 00 00</a>
+            </div>
+          </div>
+          <div class="contact-info-card">
+            <div class="contact-info-icon"><i class="fa-solid fa-envelope"></i></div>
+            <div>
+              <div class="fw-600">Email</div>
+              <a href="mailto:contact@tondlink.bf" class="text-mid text-sm" style="color:var(--green);">contact@tondlink.bf</a>
+            </div>
+          </div>
+          <div class="contact-info-card">
+            <div class="contact-info-icon"><i class="fa-solid fa-clock"></i></div>
+            <div>
+              <div class="fw-600">Horaires</div>
+              <div class="text-mid text-sm">Lun – Ven : 8h – 17h<br>Sam : 8h – 12h</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social -->
+        <div style="margin-top:28px;">
+          <div class="fw-600" style="margin-bottom:12px;">Suivez-nous</div>
+          <div style="display:flex; gap:10px;">
+            <a href="#" class="social-btn" style="background:var(--green-pale); color:var(--green); width:44px; height:44px; font-size:1rem;">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-btn" style="background:#E7F9ED; color:#25D366; width:44px; height:44px; font-size:1rem;">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+            <a href="#" class="social-btn" style="background:#EBF5FB; color:#1DA1F2; width:44px; height:44px; font-size:1rem;">
+              <i class="fa-brands fa-twitter"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- FAQ -->
+        <div style="margin-top:36px;">
+          <div class="fw-600" style="margin-bottom:16px; font-size:1rem;">Questions fréquentes</div>
+          <div class="faq-list">
+            <div class="faq-item">
+              <div class="faq-q" onclick="toggleFaq(this)">
+                <span>Comment inscrire ma coopérative ?</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+              <div class="faq-a">
+                Remplissez le formulaire ci-contre en sélectionnant "Inscrire ma coopérative" comme sujet.
+                Notre équipe vous contactera dans les 24h pour finaliser votre inscription.
+              </div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-q" onclick="toggleFaq(this)">
+                <span>L'inscription est-elle payante ?</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+              <div class="faq-a">
+                L'inscription de base est gratuite pour tous les producteurs et coopératives.
+                Des formules premium avec plus de visibilité sont disponibles.
+              </div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-q" onclick="toggleFaq(this)">
+                <span>Comment publier une offre de vente ?</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+              <div class="faq-a">
+                Après inscription, contactez-nous par WhatsApp ou email avec les détails de votre produit
+                (type, volume, prix, région) et nous publierons votre offre gratuitement.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo navbar-brand">
+          <div class="navbar-logo">T</div>
+          <span class="navbar-name">Tond<span>link</span></span>
+        </div>
+        <p class="footer-desc">Tondlink connecte les producteurs agricoles, coopératives et acheteurs professionnels au Burkina Faso.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="producteurs.html">Producteurs</a></li>
+          <li><a href="acheteurs.html">Acheteurs</a></li>
+          <li><a href="marche.html">Marché</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Filières</h4>
+        <ul>
+          <li><a href="#">Volaille</a></li>
+          <li><a href="#">Céréales</a></li>
+          <li><a href="#">Maraîchage</a></li>
+          <li><a href="#">Oléagineux</a></li>
+          <li><a href="#">Fruits</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item"><i class="fa-solid fa-location-dot"></i><span>Ouagadougou, Burkina Faso</span></div>
+        <div class="footer-contact-item"><i class="fa-solid fa-phone"></i><span>+226 70 00 00 00</span></div>
+        <div class="footer-contact-item"><i class="fa-brands fa-whatsapp"></i><span>+226 70 00 00 00</span></div>
+        <div class="footer-contact-item"><i class="fa-solid fa-envelope"></i><span>contact@tondlink.bf</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Tondlink — Tous droits réservés</span>
+      <div style="display:flex; gap:16px;"><a href="#">Mentions légales</a><a href="#">Confidentialité</a></div>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"><i class="fa-solid fa-circle-check"></i><span id="toastMsg"></span></div>
+
+<style>
+/* Contact form */
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { margin-bottom: 18px; display: flex; flex-direction: column; gap: 6px; }
+.form-group label { font-size: .82rem; font-weight: 600; color: var(--text-mid); }
+.form-group input, .form-group select, .form-group textarea {
+  padding: 11px 14px; border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm); font-size: .9rem;
+  font-family: inherit; color: var(--text-dark);
+  background: white; outline: none; transition: border-color .2s;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  border-color: var(--green); box-shadow: 0 0 0 3px rgba(45,122,58,.1);
+}
+.form-group textarea { resize: vertical; }
+
+/* Type selector */
+.type-option input { display: none; }
+.type-card {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 16px; border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm); cursor: pointer;
+  font-size: .85rem; font-weight: 500; transition: var(--transition);
+  background: white;
+}
+.type-option input:checked + .type-card {
+  border-color: var(--green); background: var(--green-pale); color: var(--green-dark);
+}
+.type-icon { font-size: 1.2rem; }
+
+/* Contact info cards */
+.contact-info-cards { display: flex; flex-direction: column; gap: 14px; }
+.contact-info-card {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 16px; background: var(--white);
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+}
+.contact-info-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: var(--green-pale); color: var(--green);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; flex-shrink: 0;
+}
+
+/* FAQ */
+.faq-list { display: flex; flex-direction: column; gap: 8px; }
+.faq-item { border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+.faq-q {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 16px; cursor: pointer; font-size: .88rem; font-weight: 600;
+  background: white; transition: background .15s;
+}
+.faq-q:hover { background: var(--green-pale); }
+.faq-q i { font-size: .75rem; color: var(--text-light); transition: transform .2s; }
+.faq-q.open i { transform: rotate(180deg); }
+.faq-a {
+  max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .3s;
+  font-size: .85rem; color: var(--text-mid); background: var(--sand);
+  padding: 0 16px; line-height: 1.6;
+}
+.faq-a.open { max-height: 200px; padding: 12px 16px; }
+
+@media (max-width: 768px) {
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+
+<script src="app.js"></script>
+</body>
+</html>

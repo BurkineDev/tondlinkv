@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Producteurs & Coopératives — Tondlink</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="container navbar-inner">
+    <a href="index.html" class="navbar-brand">
+      <div class="navbar-logo">T</div>
+      <span class="navbar-name">Tond<span>link</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="producteurs.html" class="active">Producteurs</a></li>
+      <li><a href="acheteurs.html">Transformateurs</a></li>
+      <li><a href="marche.html">Marché</a></li>
+      <li><a href="acheteurs.html">Acheteurs</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <a href="acheteurs.html" class="btn btn-outline btn-sm">Je suis acheteur</a>
+      <a href="#inscrire" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Inscrire ma coopérative</a>
+      <button class="hamburger" id="menuToggle"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-panel">
+    <button class="mobile-nav-close" id="navClose"><i class="fa-solid fa-xmark"></i></button>
+    <div style="height:48px;"></div>
+    <a href="index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+    <a href="producteurs.html" class="active"><i class="fa-solid fa-wheat-awn"></i> Producteurs</a>
+    <a href="acheteurs.html"><i class="fa-solid fa-industry"></i> Transformateurs</a>
+    <a href="marche.html"><i class="fa-solid fa-shop"></i> Marché</a>
+    <a href="acheteurs.html"><i class="fa-solid fa-handshake"></i> Acheteurs</a>
+    <a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <div style="display:flex; align-items:center; gap:12px; color:rgba(255,255,255,.6); font-size:.85rem; margin-bottom:16px;">
+      <a href="index.html" style="color:rgba(255,255,255,.6);">Accueil</a>
+      <i class="fa-solid fa-chevron-right" style="font-size:.65rem;"></i>
+      <span style="color:white;">Producteurs</span>
+    </div>
+    <div class="hero-eyebrow" style="background:rgba(255,255,255,.12); display:inline-flex; margin-bottom:14px;">
+      <i class="fa-solid fa-wheat-awn"></i> Coopératives & Groupements
+    </div>
+    <h1>Nos Coopératives Partenaires</h1>
+    <p>Découvrez notre réseau de coopératives agricoles vérifiées à travers tout le Burkina Faso.
+      Contactez-les directement pour vos achats de produits frais et transformés.</p>
+  </div>
+</div>
+
+<!-- SEARCH & FILTERS -->
+<section class="section-sm" style="background:var(--white); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="filter-bar">
+      <div class="filter-search filter-group" style="flex:1;">
+        <label><i class="fa-solid fa-search"></i> Rechercher</label>
+        <div class="search-input-wrap" style="max-width:100%;">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="coopSearch" placeholder="Nom de coopérative, produit (ex: volaille, légumes…)" oninput="filterCoops()">
+        </div>
+      </div>
+      <div class="filter-group">
+        <label>Filière</label>
+        <select id="filterFiliere" onchange="filterCoops()">
+          <option value="">Toutes les filières</option>
+          <option>Volaille</option>
+          <option>Céréales</option>
+          <option>Maraîchage</option>
+          <option>Oléagineux</option>
+          <option>Fruits</option>
+          <option>Élevage</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Région</label>
+        <select id="filterRegion" onchange="filterCoops()">
+          <option value="">Toutes les régions</option>
+          <option>Centre</option>
+          <option>Hauts-Bassins</option>
+          <option>Plateau Central</option>
+          <option>Nord</option>
+          <option>Est</option>
+          <option>Sahel</option>
+          <option>Boucle du Mouhoun</option>
+          <option>Centre-Sud</option>
+          <option>Centre-Ouest</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Contact</label>
+        <select id="filterContact" onchange="filterCoops()">
+          <option value="">Tous types</option>
+          <option>WhatsApp</option>
+          <option>Téléphone</option>
+          <option>Email</option>
+        </select>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="clearCoopFilters()" style="align-self:flex-end;">
+        <i class="fa-solid fa-rotate-left"></i> Réinitialiser
+      </button>
+    </div>
+
+    <div class="flex-between" style="margin-bottom:8px;">
+      <p class="text-mid text-sm" id="coopCount">Affichage de <strong>12 coopératives</strong></p>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <span class="text-sm text-light">Trier par :</span>
+        <select style="padding:6px 12px; border:1.5px solid var(--border); border-radius:8px; font-size:.83rem; font-family:inherit; outline:none;" onchange="sortCoops(this.value)">
+          <option value="default">Par défaut</option>
+          <option value="name">Nom A–Z</option>
+          <option value="region">Région</option>
+          <option value="volume">Volume</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COOPERATIVES GRID -->
+<section class="section">
+  <div class="container">
+    <div class="grid-4" id="coopsGrid">
+
+      <!-- Coop 1 -->
+      <div class="coop-card" data-filiere="Volaille" data-region="Centre" data-contact="WhatsApp" data-name="Coopérative Avicole du Centre">
+        <div class="coop-card-head">
+          <div class="coop-num">1</div>
+          <div>
+            <div class="coop-name">Coopérative Avicole du Centre</div>
+            <div class="coop-location"><i class="fa-solid fa-location-dot"></i> Ouagadougou, Centre</div>
+          </div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=400&q=75" alt="Volaille" class="coop-img">
+        <div class="coop-card-body">
+          <div class="coop-tags">
+            <span class="badge badge-orange">🐔 Volaille</span>
+            <span class="badge badge-green">Certifiée</span>
+          </div>
+          <div class="coop-volume">Volume : <strong>500 kg/semaine</strong></div>
+          <div class="coop-card-footer" style="padding:0; border:none; display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;">
+            <span class="badge badge-green"><i class="fa-brands fa-whatsapp"></i> WhatsApp</span>
+            <span class="badge badge-blue"><i class="fa-solid fa-phone"></i> Téléphone</span>
+          </div>
+        </div>
+        <div class="coop-card-footer">
+          <a href="tel:+22670000001" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;">
+            <i class="fa-solid fa-phone"></i> Appeler
+          </a>
+          <a href="https://wa.me/22670000001" target="_blank" class="btn btn-outline btn-sm">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Coop 2 -->
+      <div class="coop-card" data-filiere="Maraîchage" data-region="Hauts-Bassins" data-contact="Téléphone" data-name="Coop. Maraîchère de l'Ouest">
+        <div class="coop-card-head">
+          <div class="coop-num">2</div>
+          <div>
+            <div class="coop-name">Coop. Maraîchère de l'Ouest</div>
+            <div class="coop-location"><i class="fa-solid fa-location-dot"></i> Bobo-Dioulasso, Houet</div>
+          </div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=400&q=75" alt="Maraîchage" class="coop-img">
+        <div class="coop-card-body">
+          <div class="coop-tags">
+            <span class="badge badge-red">🍅 Maraîchage</span>
+          </div>
+          <div class="coop-volume">Volume : <strong>2 t/semaine</strong></div>
+          <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;">
+            <span class="badge badge-blue"><i class="fa-solid fa-phone"></i> Téléphone</span>
+          </div>
+        </div>
+        <div class="coop-card-footer">
+          <a href="tel:+22670000002" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;">
+            <i class="fa-solid fa-phone"></i> Appeler
+          </a>
+          <a href="https://wa.me/22670000002" target="_blank" class="btn btn-outline btn-sm">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Coop 3 -->
+      <div class="coop-card" data-filiere="Céréales" data-region="Plateau Central" data-contact="WhatsApp" data-name="Union des Céréaliers du Plateau">
+        <div class="coop-card-head">
+          <div class="coop-num">3</div>
+          <div>
+            <div class="coop-name">Union des Céréaliers du Plateau</div>
+            <div class="coop-location"><i class="fa-solid fa-location-dot"></i> Koudougou, Boulkiemdé</div>
+          </div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1601593346740-925612772716?w=400&q=75" alt="Céréales" class="coop-img">
+        <div class="coop-card-body">
+          <div class="coop-tags">
+            <span class="badge badge-gold">🌽 Céréales</span>
+            <span class="badge badge-green">Certifiée</span>
+          </div>
+          <div class="coop-volume">Volume : <strong>10 t/mois</strong></div>
+          <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;">
+            <span class="badge badge-green"><i class="fa-brands fa-whatsapp"></i> WhatsApp</span>
+          </div>
+        </div>
+        <div class="coop-card-footer">
+          <a href="tel:+22670000003" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;">
+            <i class="fa-solid fa-phone"></i> Appeler
+          </a>
+          <a href="https://wa.me/22670000003" target="_blank" class="btn btn-outline btn-sm">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Coop 4 -->
+      <div class="coop-card" data-filiere="Oléagineux" data-region="Boucle du Mouhoun" data-contact="Email" data-name="Groupement Sésame Burkina">
+        <div class="coop-card-head">
+          <div class="coop-num">4</div>
+          <div>
+            <div class="coop-name">Groupement Sésame Burkina</div>
+            <div class="coop-location"><i class="fa-solid fa-location-dot"></i> Dédougou, Mouhoun</div>
+          </div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=75" alt="Sésame" class="coop-img">
+        <div class="coop-card-body">
+          <div class="coop-tags">
+            <span class="badge badge-teal">🌻 Oléagineux</span>
+          </div>
+          <div class="coop-volume">Volume : <strong>5 t/mois</strong></div>
+          <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;">
+            <span class="badge badge-orange"><i class="fa-solid fa-envelope"></i> Email</span>
+          </div>
+        </div>
+        <div class="coop-card-footer">
+          <a href="mailto:sesame@tondlink.bf" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;">
+            <i class="fa-solid fa-envelope"></i> Email
+          </a>
+          <a href="tel:+22670000004" class="btn btn-outline btn-sm">
+            <i class="fa-solid fa-phone"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Coop 5 -->
+      <div class="coop-card" data-filiere="Maraîchage" data-region="Centre-Sud" data-contact="WhatsApp" data-name="Coop. Légumes du Sud">
+        <div class="coop-card-head">
+          <div class="coop-num">5</div>
+          <div>
+            <div class="coop-name">Coop. Légumes du Sud</div>
+            <div class="coop-location"><i class="fa-solid fa-location-dot"></i> Léo, Sissili</div>
+          </div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=400&q=75" alt="Légumes" class="coop-img">
+        <div class="coop-card-body">
+          <div class="coop-tags">
+            <span class="badge badge-purple">🧅 Maraîchage</span>
+          </div>
+          <div class="coop-volume">Volume : <strong>3 t/mois</strong></div>
+          <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;">
+            <span class="badge badge-green"><i class="fa-brands fa-whatsapp"></i> WhatsApp</span>
+            <span class="badge badge-blue"><i class="fa-solid fa-phone"></i> Téléphone</span>
+          </div>
+        </div>
+        <div class="coop-card-footer">
+          <a href="tel:+22670000005" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;">
+            <i class="fa-solid fa-phone"></i> Appeler
+          </a>
+          <a href="https://wa.me/22670000005" target="_blank" class="btn btn-outline btn-sm">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Coop 6 -->
+      <div class="coop-card" data-filiere="Céréales" data-region="Nord" data-contact="Téléphone" data-name="UGCPA du Nord">
+        <div class="coop-card-head">
+          <div class="coop-num">6</div>
+          <div>
+            <div class="coop-name">UGCPA du Nord</div>
+            <div class="coop-location"><i class="fa-solid fa-location-dot"></i> Ouahigouya, Yatenga</div>
+          </div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1609150448989-1ad5d0a001b5?w=400&q=75" alt="Mil Sorgho" class="coop-img">
+        <div class="coop-card-body">
+          <div class="coop-tags">
+            <span class="badge badge-gold">🌾 Céréales</span>
+            <span class="badge badge-green">Certifiée</span>
+          </div>
+          <div class="coop-volume">Volume : <strong>8 t/mois</strong></div>
+          <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;">
+            <span class="badge badge-blue"><i class="fa-solid fa-phone"></i> Téléphone</span>
+          </div>
+        </div>
+        <div class="coop-card-footer">
+          <a href="tel:+22670000006" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;">
+            <i class="fa-solid fa-phone"></i> Appeler
+          </a>
+          <a href="https://wa.me/22670000006" target="_blank" class="btn btn-outline btn-sm">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Coop 7 -->
+      <div class="coop-card" data-filiere="Volaille" data-region="Est" data-contact="WhatsApp" data-name="Aviculteurs de l'Est">
+        <div class="coop-card-head">
+          <div class="coop-num">7</div>
+          <div>
+            <div class="coop-name">Aviculteurs de l'Est</div>
+            <div class="coop-location"><i class="fa-solid fa-location-dot"></i> Fada N'Gourma, Gourma</div>
+          </div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1612170153139-6f881ff067e0?w=400&q=75" alt="Poulets" class="coop-img">
+        <div class="coop-card-body">
+          <div class="coop-tags">
+            <span class="badge badge-orange">🐔 Volaille</span>
+          </div>
+          <div class="coop-volume">Volume : <strong>300 kg/sem.</strong></div>
+          <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;">
+            <span class="badge badge-green"><i class="fa-brands fa-whatsapp"></i> WhatsApp</span>
+          </div>
+        </div>
+        <div class="coop-card-footer">
+          <a href="tel:+22670000007" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;">
+            <i class="fa-solid fa-phone"></i> Appeler
+          </a>
+          <a href="https://wa.me/22670000007" target="_blank" class="btn btn-outline btn-sm">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Coop 8 -->
+      <div class="coop-card" data-filiere="Fruits" data-region="Hauts-Bassins" data-contact="WhatsApp" data-name="Groupement Fruitier du Sud-Ouest">
+        <div class="coop-card-head">
+          <div class="coop-num">8</div>
+          <div>
+            <div class="coop-name">Groupement Fruitier du Sud-Ouest</div>
+            <div class="coop-location"><i class="fa-solid fa-location-dot"></i> Banfora, Comoé</div>
+          </div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1619566636858-adf3ef46400b?w=400&q=75" alt="Fruits" class="coop-img">
+        <div class="coop-card-body">
+          <div class="coop-tags">
+            <span class="badge badge-red">🍋 Fruits</span>
+            <span class="badge badge-green">Certifiée</span>
+          </div>
+          <div class="coop-volume">Volume : <strong>4 t/mois</strong></div>
+          <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;">
+            <span class="badge badge-green"><i class="fa-brands fa-whatsapp"></i> WhatsApp</span>
+            <span class="badge badge-blue"><i class="fa-solid fa-phone"></i> Téléphone</span>
+          </div>
+        </div>
+        <div class="coop-card-footer">
+          <a href="tel:+22670000008" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;">
+            <i class="fa-solid fa-phone"></i> Appeler
+          </a>
+          <a href="https://wa.me/22670000008" target="_blank" class="btn btn-outline btn-sm">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Coop 9 -->
+      <div class="coop-card" data-filiere="Élevage" data-region="Sahel" data-contact="Téléphone" data-name="Éleveurs du Sahel">
+        <div class="coop-card-head">
+          <div class="coop-num">9</div>
+          <div>
+            <div class="coop-name">Éleveurs du Sahel</div>
+            <div class="coop-location"><i class="fa-solid fa-location-dot"></i> Dori, Séno</div>
+          </div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=400&q=75" alt="Élevage" class="coop-img">
+        <div class="coop-card-body">
+          <div class="coop-tags">
+            <span class="badge badge-teal">🐄 Élevage</span>
+          </div>
+          <div class="coop-volume">Volume : <strong>20 têtes/mois</strong></div>
+          <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;">
+            <span class="badge badge-blue"><i class="fa-solid fa-phone"></i> Téléphone</span>
+          </div>
+        </div>
+        <div class="coop-card-footer">
+          <a href="tel:+22670000009" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;">
+            <i class="fa-solid fa-phone"></i> Appeler
+          </a>
+          <a href="https://wa.me/22670000009" target="_blank" class="btn btn-outline btn-sm">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Coop 10 -->
+      <div class="coop-card" data-filiere="Oléagineux" data-region="Centre-Ouest" data-contact="WhatsApp" data-name="Producteurs d'Arachide du Centre-Ouest">
+        <div class="coop-card-head">
+          <div class="coop-num">10</div>
+          <div>
+            <div class="coop-name">Producteurs d'Arachide</div>
+            <div class="coop-location"><i class="fa-solid fa-location-dot"></i> Réo, Sanguié</div>
+          </div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1567653418876-5bb0e566e1c2?w=400&q=75" alt="Arachide" class="coop-img">
+        <div class="coop-card-body">
+          <div class="coop-tags">
+            <span class="badge badge-gold">🥜 Oléagineux</span>
+          </div>
+          <div class="coop-volume">Volume : <strong>6 t/mois</strong></div>
+          <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;">
+            <span class="badge badge-green"><i class="fa-brands fa-whatsapp"></i> WhatsApp</span>
+          </div>
+        </div>
+        <div class="coop-card-footer">
+          <a href="tel:+22670000010" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;">
+            <i class="fa-solid fa-phone"></i> Appeler
+          </a>
+          <a href="https://wa.me/22670000010" target="_blank" class="btn btn-outline btn-sm">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Coop 11 -->
+      <div class="coop-card" data-filiere="Maraîchage" data-region="Centre" data-contact="Email" data-name="Jardins Verts de Ouaga">
+        <div class="coop-card-head">
+          <div class="coop-num">11</div>
+          <div>
+            <div class="coop-name">Jardins Verts de Ouaga</div>
+            <div class="coop-location"><i class="fa-solid fa-location-dot"></i> Ouagadougou, Kadiogo</div>
+          </div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1543168256-418811576931?w=400&q=75" alt="Jardins" class="coop-img">
+        <div class="coop-card-body">
+          <div class="coop-tags">
+            <span class="badge badge-green">🥦 Maraîchage</span>
+          </div>
+          <div class="coop-volume">Volume : <strong>1.5 t/sem.</strong></div>
+          <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;">
+            <span class="badge badge-orange"><i class="fa-solid fa-envelope"></i> Email</span>
+            <span class="badge badge-blue"><i class="fa-solid fa-phone"></i> Téléphone</span>
+          </div>
+        </div>
+        <div class="coop-card-footer">
+          <a href="tel:+22670000011" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;">
+            <i class="fa-solid fa-phone"></i> Appeler
+          </a>
+          <a href="https://wa.me/22670000011" target="_blank" class="btn btn-outline btn-sm">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Coop 12 -->
+      <div class="coop-card" data-filiere="Céréales" data-region="Est" data-contact="WhatsApp" data-name="Céréaliers de l'Est Burkina">
+        <div class="coop-card-head">
+          <div class="coop-num">12</div>
+          <div>
+            <div class="coop-name">Céréaliers de l'Est Burkina</div>
+            <div class="coop-location"><i class="fa-solid fa-location-dot"></i> Diapaga, Tapoa</div>
+          </div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6962b3?w=400&q=75" alt="Céréales Est" class="coop-img">
+        <div class="coop-card-body">
+          <div class="coop-tags">
+            <span class="badge badge-gold">🌽 Céréales</span>
+          </div>
+          <div class="coop-volume">Volume : <strong>12 t/mois</strong></div>
+          <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px;">
+            <span class="badge badge-green"><i class="fa-brands fa-whatsapp"></i> WhatsApp</span>
+          </div>
+        </div>
+        <div class="coop-card-footer">
+          <a href="tel:+22670000012" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;">
+            <i class="fa-solid fa-phone"></i> Appeler
+          </a>
+          <a href="https://wa.me/22670000012" target="_blank" class="btn btn-outline btn-sm">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /grid -->
+
+    <div id="coopEmpty" class="empty-state" style="display:none;">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <p>Aucune coopérative ne correspond à vos critères.</p>
+      <button class="btn btn-outline" style="margin-top:12px;" onclick="clearCoopFilters()">Effacer les filtres</button>
+    </div>
+
+    <!-- Load more -->
+    <div style="text-align:center; margin-top:40px;">
+      <button class="btn btn-outline btn-lg" id="loadMoreBtn">
+        <i class="fa-solid fa-rotate"></i> Charger plus de coopératives
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- INSCRIRE SECTION -->
+<section class="section" id="inscrire" style="background:var(--white);">
+  <div class="container">
+    <div style="max-width:680px; margin:0 auto; text-align:center;">
+      <span class="eyebrow">Vous êtes producteur ?</span>
+      <h2>Inscrivez votre coopérative sur Tondlink</h2>
+      <p class="text-mid" style="margin:14px 0 32px;">
+        Rejoignez notre réseau et accédez à des centaines d'acheteurs professionnels
+        et transformateurs à travers tout le Burkina Faso.
+      </p>
+      <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+        <a href="contact.html" class="btn btn-primary btn-lg">
+          <i class="fa-solid fa-plus"></i> Inscrire ma coopérative
+        </a>
+        <a href="tel:+22670000000" class="btn btn-outline btn-lg">
+          <i class="fa-solid fa-phone"></i> Nous appeler
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo navbar-brand">
+          <div class="navbar-logo">T</div>
+          <span class="navbar-name">Tond<span>link</span></span>
+        </div>
+        <p class="footer-desc">
+          Tondlink connecte les producteurs agricoles, coopératives et acheteurs professionnels
+          au Burkina Faso pour des transactions simples et directes.
+        </p>
+        <div class="footer-social">
+          <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="producteurs.html">Producteurs & Coopératives</a></li>
+          <li><a href="acheteurs.html">Acheteurs & Transformateurs</a></li>
+          <li><a href="marche.html">Marché agricole</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Filières</h4>
+        <ul>
+          <li><a href="#">Volaille</a></li>
+          <li><a href="#">Céréales</a></li>
+          <li><a href="#">Maraîchage</a></li>
+          <li><a href="#">Oléagineux</a></li>
+          <li><a href="#">Fruits</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Coordonnées Tondlink</h4>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-location-dot"></i><span>Ouagadougou, Burkina Faso</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-phone"></i><span>+226 70 00 00 00</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-brands fa-whatsapp"></i><span>+226 70 00 00 00</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-envelope"></i><span>contact@tondlink.bf</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Tondlink — Tous droits réservés</span>
+      <div style="display:flex; gap:16px;">
+        <a href="#">Mentions légales</a>
+        <a href="#">Confidentialité</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"><i class="fa-solid fa-circle-check"></i><span id="toastMsg"></span></div>
+
+<script src="app.js"></script>
+</body>
+</html>

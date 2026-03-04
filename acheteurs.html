@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acheteurs & Transformateurs — Tondlink</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="container navbar-inner">
+    <a href="index.html" class="navbar-brand">
+      <div class="navbar-logo">T</div>
+      <span class="navbar-name">Tond<span>link</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="producteurs.html">Producteurs</a></li>
+      <li><a href="acheteurs.html" class="active">Transformateurs</a></li>
+      <li><a href="marche.html">Marché</a></li>
+      <li><a href="acheteurs.html" class="active">Acheteurs</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <a href="producteurs.html" class="btn btn-outline btn-sm">Je suis producteur</a>
+      <a href="contact.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Inscrire mon entreprise</a>
+      <button class="hamburger" id="menuToggle"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-panel">
+    <button class="mobile-nav-close" id="navClose"><i class="fa-solid fa-xmark"></i></button>
+    <div style="height:48px;"></div>
+    <a href="index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+    <a href="producteurs.html"><i class="fa-solid fa-wheat-awn"></i> Producteurs</a>
+    <a href="acheteurs.html" class="active"><i class="fa-solid fa-industry"></i> Transformateurs</a>
+    <a href="marche.html"><i class="fa-solid fa-shop"></i> Marché</a>
+    <a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <div style="display:flex; align-items:center; gap:12px; color:rgba(255,255,255,.6); font-size:.85rem; margin-bottom:16px;">
+      <a href="index.html" style="color:rgba(255,255,255,.6);">Accueil</a>
+      <i class="fa-solid fa-chevron-right" style="font-size:.65rem;"></i>
+      <span style="color:white;">Acheteurs & Transformateurs</span>
+    </div>
+    <div class="hero-eyebrow" style="background:rgba(255,255,255,.12); display:inline-flex; margin-bottom:14px;">
+      <i class="fa-solid fa-industry"></i> Débouchés professionnels
+    </div>
+    <h1>Acheteurs & Transformateurs</h1>
+    <p>Trouvez des débouchés professionnels pour vos produits agricoles.
+      Entreprises alimentaires, restaurateurs, grossistes et unités de transformation.</p>
+  </div>
+</div>
+
+<!-- TAB BAR -->
+<div style="background:var(--white); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div style="display:flex; gap:0; overflow-x:auto;">
+      <button class="tab-btn active" data-tab="all" onclick="filterBuyers('all', this)">
+        <i class="fa-solid fa-grid-2"></i> Tous
+        <span class="tab-count" id="countAll">10</span>
+      </button>
+      <button class="tab-btn" data-tab="Acheteur" onclick="filterBuyers('Acheteur', this)">
+        <i class="fa-solid fa-cart-shopping"></i> Acheteurs finals
+        <span class="tab-count" id="countAcheteur">6</span>
+      </button>
+      <button class="tab-btn" data-tab="Transformateur" onclick="filterBuyers('Transformateur', this)">
+        <i class="fa-solid fa-industry"></i> Transformateurs
+        <span class="tab-count" id="countTransformateur">4</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<section class="section-sm" style="background:var(--white); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="filter-bar">
+      <div class="filter-search filter-group" style="flex:1;">
+        <label><i class="fa-solid fa-search"></i> Rechercher</label>
+        <div class="search-input-wrap" style="max-width:100%;">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="buyerSearch" placeholder="Nom d'entreprise, produit recherché…" oninput="applyBuyerFilters()">
+        </div>
+      </div>
+      <div class="filter-group">
+        <label>Filière</label>
+        <select id="buyerFiliere" onchange="applyBuyerFilters()">
+          <option value="">Toutes les filières</option>
+          <option>Volaille</option>
+          <option>Céréales</option>
+          <option>Maraîchage</option>
+          <option>Oléagineux</option>
+          <option>Fruits</option>
+          <option>Élevage</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Région</label>
+        <select id="buyerRegion" onchange="applyBuyerFilters()">
+          <option value="">Toutes les régions</option>
+          <option>Centre</option>
+          <option>Hauts-Bassins</option>
+          <option>Plateau Central</option>
+          <option>Nord</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Volume recherché</label>
+        <select id="buyerVolume" onchange="applyBuyerFilters()">
+          <option value="">Tous volumes</option>
+          <option>Petite quantité (< 1t)</option>
+          <option>Moyenne quantité (1-10t)</option>
+          <option>Grande quantité (> 10t)</option>
+        </select>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="clearBuyerFilters()" style="align-self:flex-end;">
+        <i class="fa-solid fa-rotate-left"></i> Réinitialiser
+      </button>
+    </div>
+    <p class="text-mid text-sm" id="buyerCount">Affichage de <strong>10 partenaires</strong></p>
+  </div>
+</section>
+
+<!-- BUYERS GRID -->
+<section class="section">
+  <div class="container">
+    <div class="grid-3" id="buyersGrid">
+
+      <!-- Card 1 -->
+      <div class="buyer-card" data-type="Acheteur" data-filiere="Céréales" data-region="Centre" data-name="FasoMarket">
+        <div class="buyer-card-img">
+          <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&q=80" alt="FasoMarket">
+          <div style="position:absolute;top:12px;left:12px;">
+            <span class="badge badge-blue"><i class="fa-solid fa-cart-shopping"></i> Acheteur final</span>
+          </div>
+        </div>
+        <div class="buyer-card-body">
+          <div class="buyer-card-top">
+            <div>
+              <div class="buyer-name">FasoMarket</div>
+              <div class="buyer-type">Supermarché & Épicerie</div>
+            </div>
+            <span class="badge badge-green">Actif</span>
+          </div>
+          <div class="buyer-need">
+            <strong>Recherche :</strong> Céréales, légumes frais, fruits<br>
+            <strong>Volume :</strong> 2 à 5 tonnes / semaine
+          </div>
+          <div class="buyer-card-meta">
+            <i class="fa-solid fa-location-dot" style="color:var(--green);"></i>
+            Ouagadougou, Centre
+          </div>
+          <div class="buyer-tags" style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px;">
+            <span class="badge badge-gold">🌽 Céréales</span>
+            <span class="badge badge-red">🥬 Légumes</span>
+            <span class="badge badge-red">🍋 Fruits</span>
+          </div>
+        </div>
+        <div class="buyer-card-footer">
+          <a href="tel:+22670000020" class="btn btn-primary" style="width:100%; justify-content:center;">
+            <i class="fa-solid fa-phone"></i> Contacter
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="buyer-card" data-type="Transformateur" data-filiere="Volaille" data-region="Centre" data-name="Unité Volaille Pro">
+        <div class="buyer-card-img">
+          <img src="https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=600&q=80" alt="Unité Volaille Pro">
+          <div style="position:absolute;top:12px;left:12px;">
+            <span class="badge badge-purple"><i class="fa-solid fa-industry"></i> Transformateur</span>
+          </div>
+        </div>
+        <div class="buyer-card-body">
+          <div class="buyer-card-top">
+            <div>
+              <div class="buyer-name">Unité Volaille Pro</div>
+              <div class="buyer-type">Abattoir & Transformation avicole</div>
+            </div>
+            <span class="badge badge-green">Actif</span>
+          </div>
+          <div class="buyer-need">
+            <strong>Recherche :</strong> Poulets vivants, pintades<br>
+            <strong>Volume :</strong> 1 000 à 3 000 têtes / semaine
+          </div>
+          <div class="buyer-card-meta">
+            <i class="fa-solid fa-location-dot" style="color:var(--green);"></i>
+            Ouagadougou, Kadiogo
+          </div>
+          <div class="buyer-tags" style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px;">
+            <span class="badge badge-orange">🐔 Volaille</span>
+          </div>
+        </div>
+        <div class="buyer-card-footer">
+          <a href="tel:+22670000021" class="btn btn-primary" style="width:100%; justify-content:center;">
+            <i class="fa-solid fa-phone"></i> Contacter
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="buyer-card" data-type="Acheteur" data-filiere="Maraîchage" data-region="Centre" data-name="Restau Savane">
+        <div class="buyer-card-img">
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="Restau Savane">
+          <div style="position:absolute;top:12px;left:12px;">
+            <span class="badge badge-blue"><i class="fa-solid fa-cart-shopping"></i> Acheteur final</span>
+          </div>
+        </div>
+        <div class="buyer-card-body">
+          <div class="buyer-card-top">
+            <div>
+              <div class="buyer-name">Restau Savane</div>
+              <div class="buyer-type">Restauration collective</div>
+            </div>
+            <span class="badge badge-green">Actif</span>
+          </div>
+          <div class="buyer-need">
+            <strong>Recherche :</strong> Légumes, tomates, oignons, volaille<br>
+            <strong>Volume :</strong> 200 à 500 kg / semaine
+          </div>
+          <div class="buyer-card-meta">
+            <i class="fa-solid fa-location-dot" style="color:var(--green);"></i>
+            Ouagadougou, Centre
+          </div>
+          <div class="buyer-tags" style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px;">
+            <span class="badge badge-red">🍅 Légumes</span>
+            <span class="badge badge-orange">🐔 Volaille</span>
+          </div>
+        </div>
+        <div class="buyer-card-footer">
+          <a href="tel:+22670000022" class="btn btn-primary" style="width:100%; justify-content:center;">
+            <i class="fa-solid fa-phone"></i> Contacter
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="buyer-card" data-type="Transformateur" data-filiere="Oléagineux" data-region="Hauts-Bassins" data-name="Huilerie du Mouhoun">
+        <div class="buyer-card-img">
+          <img src="https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=600&q=80" alt="Huilerie">
+          <div style="position:absolute;top:12px;left:12px;">
+            <span class="badge badge-purple"><i class="fa-solid fa-industry"></i> Transformateur</span>
+          </div>
+        </div>
+        <div class="buyer-card-body">
+          <div class="buyer-card-top">
+            <div>
+              <div class="buyer-name">Huilerie du Mouhoun</div>
+              <div class="buyer-type">Transformation oléagineuse</div>
+            </div>
+            <span class="badge badge-green">Actif</span>
+          </div>
+          <div class="buyer-need">
+            <strong>Recherche :</strong> Sésame, arachide, karité<br>
+            <strong>Volume :</strong> 5 à 20 tonnes / mois
+          </div>
+          <div class="buyer-card-meta">
+            <i class="fa-solid fa-location-dot" style="color:var(--green);"></i>
+            Bobo-Dioulasso, Hauts-Bassins
+          </div>
+          <div class="buyer-tags" style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px;">
+            <span class="badge badge-teal">🌻 Sésame</span>
+            <span class="badge badge-gold">🥜 Arachide</span>
+          </div>
+        </div>
+        <div class="buyer-card-footer">
+          <a href="tel:+22670000023" class="btn btn-primary" style="width:100%; justify-content:center;">
+            <i class="fa-solid fa-phone"></i> Contacter
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="buyer-card" data-type="Acheteur" data-filiere="Céréales" data-region="Centre" data-name="Groupe AgroFaso">
+        <div class="buyer-card-img">
+          <img src="https://images.unsplash.com/photo-1631209121750-a9f656d28f5e?w=600&q=80" alt="AgroFaso">
+          <div style="position:absolute;top:12px;left:12px;">
+            <span class="badge badge-blue"><i class="fa-solid fa-cart-shopping"></i> Acheteur final</span>
+          </div>
+        </div>
+        <div class="buyer-card-body">
+          <div class="buyer-card-top">
+            <div>
+              <div class="buyer-name">Groupe AgroFaso</div>
+              <div class="buyer-type">Grossiste en céréales</div>
+            </div>
+            <span class="badge badge-green">Actif</span>
+          </div>
+          <div class="buyer-need">
+            <strong>Recherche :</strong> Maïs, mil, sorgho, riz<br>
+            <strong>Volume :</strong> 10 à 50 tonnes / mois
+          </div>
+          <div class="buyer-card-meta">
+            <i class="fa-solid fa-location-dot" style="color:var(--green);"></i>
+            Ouagadougou, Centre
+          </div>
+          <div class="buyer-tags" style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px;">
+            <span class="badge badge-gold">🌽 Maïs</span>
+            <span class="badge badge-gold">🌾 Mil/Sorgho</span>
+          </div>
+        </div>
+        <div class="buyer-card-footer">
+          <a href="tel:+22670000024" class="btn btn-primary" style="width:100%; justify-content:center;">
+            <i class="fa-solid fa-phone"></i> Contacter
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="buyer-card" data-type="Transformateur" data-filiere="Céréales" data-region="Centre" data-name="Minoterie Centrale">
+        <div class="buyer-card-img">
+          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&q=80" alt="Minoterie">
+          <div style="position:absolute;top:12px;left:12px;">
+            <span class="badge badge-purple"><i class="fa-solid fa-industry"></i> Transformateur</span>
+          </div>
+        </div>
+        <div class="buyer-card-body">
+          <div class="buyer-card-top">
+            <div>
+              <div class="buyer-name">Minoterie Centrale</div>
+              <div class="buyer-type">Mouture & Transformation céréales</div>
+            </div>
+            <span class="badge badge-green">Actif</span>
+          </div>
+          <div class="buyer-need">
+            <strong>Recherche :</strong> Maïs, mil, sorgho<br>
+            <strong>Volume :</strong> 20 à 100 tonnes / mois
+          </div>
+          <div class="buyer-card-meta">
+            <i class="fa-solid fa-location-dot" style="color:var(--green);"></i>
+            Ouagadougou, Centre
+          </div>
+          <div class="buyer-tags" style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px;">
+            <span class="badge badge-gold">🌽 Céréales</span>
+          </div>
+        </div>
+        <div class="buyer-card-footer">
+          <a href="tel:+22670000025" class="btn btn-primary" style="width:100%; justify-content:center;">
+            <i class="fa-solid fa-phone"></i> Contacter
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="buyer-card" data-type="Acheteur" data-filiere="Fruits" data-region="Hauts-Bassins" data-name="Jus Tropical BF">
+        <div class="buyer-card-img">
+          <img src="https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=600&q=80" alt="Jus Tropical">
+          <div style="position:absolute;top:12px;left:12px;">
+            <span class="badge badge-blue"><i class="fa-solid fa-cart-shopping"></i> Acheteur final</span>
+          </div>
+        </div>
+        <div class="buyer-card-body">
+          <div class="buyer-card-top">
+            <div>
+              <div class="buyer-name">Jus Tropical BF</div>
+              <div class="buyer-type">Production de jus de fruits</div>
+            </div>
+            <span class="badge badge-green">Actif</span>
+          </div>
+          <div class="buyer-need">
+            <strong>Recherche :</strong> Mangues, citrons, tamarin<br>
+            <strong>Volume :</strong> 3 à 10 tonnes / saison
+          </div>
+          <div class="buyer-card-meta">
+            <i class="fa-solid fa-location-dot" style="color:var(--green);"></i>
+            Bobo-Dioulasso, Hauts-Bassins
+          </div>
+          <div class="buyer-tags" style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px;">
+            <span class="badge badge-red">🥭 Fruits tropicaux</span>
+          </div>
+        </div>
+        <div class="buyer-card-footer">
+          <a href="tel:+22670000026" class="btn btn-primary" style="width:100%; justify-content:center;">
+            <i class="fa-solid fa-phone"></i> Contacter
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="buyer-card" data-type="Acheteur" data-filiere="Élevage" data-region="Nord" data-name="Bouchers Professionnels du Nord">
+        <div class="buyer-card-img">
+          <img src="https://images.unsplash.com/photo-1611672585731-fa10603fb9e0?w=600&q=80" alt="Bouchers">
+          <div style="position:absolute;top:12px;left:12px;">
+            <span class="badge badge-blue"><i class="fa-solid fa-cart-shopping"></i> Acheteur final</span>
+          </div>
+        </div>
+        <div class="buyer-card-body">
+          <div class="buyer-card-top">
+            <div>
+              <div class="buyer-name">Bouchers Prof. du Nord</div>
+              <div class="buyer-type">Distribution de viande</div>
+            </div>
+            <span class="badge badge-green">Actif</span>
+          </div>
+          <div class="buyer-need">
+            <strong>Recherche :</strong> Bovins, ovins, caprins<br>
+            <strong>Volume :</strong> 10 à 30 têtes / semaine
+          </div>
+          <div class="buyer-card-meta">
+            <i class="fa-solid fa-location-dot" style="color:var(--green);"></i>
+            Ouahigouya, Nord
+          </div>
+          <div class="buyer-tags" style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px;">
+            <span class="badge badge-teal">🐄 Élevage</span>
+          </div>
+        </div>
+        <div class="buyer-card-footer">
+          <a href="tel:+22670000027" class="btn btn-primary" style="width:100%; justify-content:center;">
+            <i class="fa-solid fa-phone"></i> Contacter
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 9 -->
+      <div class="buyer-card" data-type="Acheteur" data-filiere="Maraîchage" data-region="Centre" data-name="Hôtel Azalaï">
+        <div class="buyer-card-img">
+          <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80" alt="Hôtel Azalaï">
+          <div style="position:absolute;top:12px;left:12px;">
+            <span class="badge badge-blue"><i class="fa-solid fa-cart-shopping"></i> Acheteur final</span>
+          </div>
+        </div>
+        <div class="buyer-card-body">
+          <div class="buyer-card-top">
+            <div>
+              <div class="buyer-name">Hôtellerie & Tourisme</div>
+              <div class="buyer-type">Restauration hôtelière</div>
+            </div>
+            <span class="badge badge-green">Actif</span>
+          </div>
+          <div class="buyer-need">
+            <strong>Recherche :</strong> Légumes bios, volaille, fruits frais<br>
+            <strong>Volume :</strong> Livraisons hebdomadaires
+          </div>
+          <div class="buyer-card-meta">
+            <i class="fa-solid fa-location-dot" style="color:var(--green);"></i>
+            Ouagadougou, Centre
+          </div>
+          <div class="buyer-tags" style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px;">
+            <span class="badge badge-red">🥬 Légumes</span>
+            <span class="badge badge-orange">🐔 Volaille</span>
+          </div>
+        </div>
+        <div class="buyer-card-footer">
+          <a href="tel:+22670000028" class="btn btn-primary" style="width:100%; justify-content:center;">
+            <i class="fa-solid fa-phone"></i> Contacter
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 10 -->
+      <div class="buyer-card" data-type="Acheteur" data-filiere="Oléagineux" data-region="Centre" data-name="Marché Import-Export BF">
+        <div class="buyer-card-img">
+          <img src="https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=600&q=80" alt="Import Export">
+          <div style="position:absolute;top:12px;left:12px;">
+            <span class="badge badge-blue"><i class="fa-solid fa-cart-shopping"></i> Acheteur final</span>
+          </div>
+        </div>
+        <div class="buyer-card-body">
+          <div class="buyer-card-top">
+            <div>
+              <div class="buyer-name">Import-Export BF</div>
+              <div class="buyer-type">Commerce & Export agricole</div>
+            </div>
+            <span class="badge badge-green">Actif</span>
+          </div>
+          <div class="buyer-need">
+            <strong>Recherche :</strong> Sésame, coton, karité pour export<br>
+            <strong>Volume :</strong> 50 à 200 tonnes / campagne
+          </div>
+          <div class="buyer-card-meta">
+            <i class="fa-solid fa-location-dot" style="color:var(--green);"></i>
+            Ouagadougou, Centre
+          </div>
+          <div class="buyer-tags" style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px;">
+            <span class="badge badge-teal">🌻 Oléagineux</span>
+            <span class="badge badge-green">Export</span>
+          </div>
+        </div>
+        <div class="buyer-card-footer">
+          <a href="tel:+22670000029" class="btn btn-primary" style="width:100%; justify-content:center;">
+            <i class="fa-solid fa-phone"></i> Contacter
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /grid -->
+
+    <div id="buyerEmpty" class="empty-state" style="display:none;">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <p>Aucun acheteur ne correspond à vos critères.</p>
+      <button class="btn btn-outline" style="margin-top:12px;" onclick="clearBuyerFilters()">Effacer les filtres</button>
+    </div>
+  </div>
+</section>
+
+<!-- INSCRIPTION SECTION -->
+<section class="cta-section">
+  <div class="container" style="position:relative;z-index:1;">
+    <span class="eyebrow" style="color:var(--gold-light); display:block; margin-bottom:10px;">Vous êtes acheteur ou transformateur ?</span>
+    <h2>Inscrivez votre entreprise sur Tondlink</h2>
+    <p>Accédez à notre réseau de coopératives pour des approvisionnements fiables et réguliers.</p>
+    <div class="ctas">
+      <a href="contact.html" class="btn btn-gold btn-lg">
+        <i class="fa-solid fa-building"></i> Inscrire mon entreprise
+      </a>
+      <a href="producteurs.html" class="btn btn-outline-white btn-lg">
+        <i class="fa-solid fa-wheat-awn"></i> Voir les producteurs
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo navbar-brand">
+          <div class="navbar-logo">T</div>
+          <span class="navbar-name">Tond<span>link</span></span>
+        </div>
+        <p class="footer-desc">
+          Tondlink connecte les producteurs agricoles, coopératives et acheteurs professionnels
+          au Burkina Faso pour des transactions simples et directes.
+        </p>
+        <div class="footer-social">
+          <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="producteurs.html">Producteurs & Coopératives</a></li>
+          <li><a href="acheteurs.html">Acheteurs & Transformateurs</a></li>
+          <li><a href="marche.html">Marché agricole</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Filières</h4>
+        <ul>
+          <li><a href="#">Volaille</a></li>
+          <li><a href="#">Céréales</a></li>
+          <li><a href="#">Maraîchage</a></li>
+          <li><a href="#">Oléagineux</a></li>
+          <li><a href="#">Fruits</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Coordonnées Tondlink</h4>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-location-dot"></i><span>Ouagadougou, Burkina Faso</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-phone"></i><span>+226 70 00 00 00</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-brands fa-whatsapp"></i><span>+226 70 00 00 00</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-envelope"></i><span>contact@tondlink.bf</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Tondlink — Tous droits réservés</span>
+      <div style="display:flex; gap:16px;">
+        <a href="#">Mentions légales</a>
+        <a href="#">Confidentialité</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"><i class="fa-solid fa-circle-check"></i><span id="toastMsg"></span></div>
+
+<style>
+.buyer-card-img { position: relative; }
+.tab-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 20px; border: none; background: none;
+  font-size: .88rem; font-weight: 600; color: var(--text-mid);
+  cursor: pointer; border-bottom: 3px solid transparent;
+  white-space: nowrap; transition: var(--transition);
+}
+.tab-btn:hover { color: var(--green); }
+.tab-btn.active { color: var(--green); border-bottom-color: var(--green); }
+.tab-count {
+  background: var(--green-pale); color: var(--green);
+  padding: 2px 8px; border-radius: 50px; font-size: .75rem;
+}
+.tab-btn.active .tab-count { background: var(--green); color: white; }
+</style>
+
+<script src="app.js"></script>
+</body>
+</html>

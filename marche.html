@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marché Agricole — Tondlink</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="container navbar-inner">
+    <a href="index.html" class="navbar-brand">
+      <div class="navbar-logo">T</div>
+      <span class="navbar-name">Tond<span>link</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="producteurs.html">Producteurs</a></li>
+      <li><a href="acheteurs.html">Transformateurs</a></li>
+      <li><a href="marche.html" class="active">Marché</a></li>
+      <li><a href="acheteurs.html">Acheteurs</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <a href="acheteurs.html" class="btn btn-outline btn-sm">Je suis acheteur</a>
+      <a href="producteurs.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-seedling"></i> Je suis producteur</a>
+      <button class="hamburger" id="menuToggle"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-panel">
+    <button class="mobile-nav-close" id="navClose"><i class="fa-solid fa-xmark"></i></button>
+    <div style="height:48px;"></div>
+    <a href="index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+    <a href="producteurs.html"><i class="fa-solid fa-wheat-awn"></i> Producteurs</a>
+    <a href="acheteurs.html"><i class="fa-solid fa-industry"></i> Transformateurs</a>
+    <a href="marche.html" class="active"><i class="fa-solid fa-shop"></i> Marché</a>
+    <a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <div style="display:flex; align-items:center; gap:12px; color:rgba(255,255,255,.6); font-size:.85rem; margin-bottom:16px;">
+      <a href="index.html" style="color:rgba(255,255,255,.6);">Accueil</a>
+      <i class="fa-solid fa-chevron-right" style="font-size:.65rem;"></i>
+      <span style="color:white;">Marché</span>
+    </div>
+    <div class="hero-eyebrow" style="background:rgba(255,255,255,.12); display:inline-flex; margin-bottom:14px;">
+      <i class="fa-solid fa-shop"></i> Offres en temps réel
+    </div>
+    <h1>Marché Agricole Tondlink</h1>
+    <p>Toutes les offres de produits agricoles disponibles en ce moment au Burkina Faso.
+      Prix, volumes et contact direct avec les producteurs.</p>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<section class="section-sm" style="background:var(--white); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="filter-bar">
+      <div class="filter-search filter-group" style="flex:1;">
+        <label>Rechercher un produit</label>
+        <div class="search-input-wrap" style="max-width:100%;">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="marcheSearch" placeholder="Maïs, poulet, tomate, sésame…" oninput="filterMarche()">
+        </div>
+      </div>
+      <div class="filter-group">
+        <label>Catégorie</label>
+        <select id="marcheCategorie" onchange="filterMarche()">
+          <option value="">Toutes catégories</option>
+          <option>Volaille</option>
+          <option>Céréales</option>
+          <option>Maraîchage</option>
+          <option>Oléagineux</option>
+          <option>Fruits</option>
+          <option>Élevage</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Région</label>
+        <select id="marcheRegion" onchange="filterMarche()">
+          <option value="">Toutes régions</option>
+          <option>Centre</option>
+          <option>Hauts-Bassins</option>
+          <option>Plateau Central</option>
+          <option>Nord</option>
+          <option>Est</option>
+          <option>Sahel</option>
+          <option>Boucle du Mouhoun</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Prix max (F/kg)</label>
+        <input type="number" id="marchePrix" placeholder="ex: 500" oninput="filterMarche()">
+      </div>
+      <div class="filter-group">
+        <label>Trier par</label>
+        <select id="marcheSort" onchange="filterMarche()">
+          <option value="recent">Plus récent</option>
+          <option value="price_asc">Prix croissant</option>
+          <option value="price_desc">Prix décroissant</option>
+          <option value="volume">Volume dispo</option>
+        </select>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="clearMarcheFilters()" style="align-self:flex-end;">
+        <i class="fa-solid fa-rotate-left"></i> Réinitialiser
+      </button>
+    </div>
+
+    <!-- Chip filters -->
+    <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:4px;">
+      <button class="filter-chip active" data-marche-filter="all">Tout voir</button>
+      <button class="filter-chip" data-marche-filter="Volaille">🐔 Volaille</button>
+      <button class="filter-chip" data-marche-filter="Céréales">🌽 Céréales</button>
+      <button class="filter-chip" data-marche-filter="Maraîchage">🥬 Maraîchage</button>
+      <button class="filter-chip" data-marche-filter="Oléagineux">🌻 Oléagineux</button>
+      <button class="filter-chip" data-marche-filter="Fruits">🍋 Fruits</button>
+      <button class="filter-chip" data-marche-filter="Élevage">🐄 Élevage</button>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:16px;">
+      <p class="text-sm text-mid" id="marcheCount">Affichage de <strong>12 offres</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- OFFERS GRID -->
+<section class="section">
+  <div class="container">
+    <div class="grid-3" id="marcheGrid">
+
+      <div class="offer-card" data-cat="Volaille" data-price="1500" data-region="Centre">
+        <div class="offer-card-img">
+          <img src="https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=600&q=80" alt="Poulets de chair">
+          <div style="position:absolute;top:12px;right:12px;">
+            <span class="badge badge-green" style="font-size:.7rem;">Disponible</span>
+          </div>
+        </div>
+        <div class="offer-card-body">
+          <div class="offer-card-header">
+            <div><span class="badge badge-orange">🐔 Volaille</span><h3 style="margin-top:8px;">Poulets de chair</h3></div>
+            <div style="text-align:right;"><div class="price">1 500 F<span>/kg</span></div></div>
+          </div>
+          <div class="offer-meta">
+            <div class="offer-meta-row"><i class="fa-solid fa-box"></i>Volume : <strong style="margin-left:4px;">500 kg</strong></div>
+            <div class="offer-meta-row"><i class="fa-solid fa-location-dot"></i>Ouagadougou, Centre</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-building"></i>Coop. Avicole du Centre</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-calendar"></i>Publié : il y a 2 jours</div>
+          </div>
+          <div class="offer-card-footer">
+            <a href="tel:+22670000001" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;"><i class="fa-solid fa-phone"></i> Contacter</a>
+            <a href="https://wa.me/22670000001" target="_blank" class="btn btn-outline btn-sm"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="offer-card" data-cat="Maraîchage" data-price="200" data-region="Hauts-Bassins">
+        <div class="offer-card-img">
+          <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=600&q=80" alt="Tomates">
+          <div style="position:absolute;top:12px;right:12px;"><span class="badge badge-green" style="font-size:.7rem;">Disponible</span></div>
+        </div>
+        <div class="offer-card-body">
+          <div class="offer-card-header">
+            <div><span class="badge badge-red">🍅 Maraîchage</span><h3 style="margin-top:8px;">Tomates fraîches</h3></div>
+            <div style="text-align:right;"><div class="price">200 F<span>/kg</span></div></div>
+          </div>
+          <div class="offer-meta">
+            <div class="offer-meta-row"><i class="fa-solid fa-box"></i>Volume : <strong style="margin-left:4px;">2 tonnes</strong></div>
+            <div class="offer-meta-row"><i class="fa-solid fa-location-dot"></i>Bobo-Dioulasso, Houet</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-building"></i>Coop. Maraîchère de l'Ouest</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-calendar"></i>Publié : aujourd'hui</div>
+          </div>
+          <div class="offer-card-footer">
+            <a href="tel:+22670000002" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;"><i class="fa-solid fa-phone"></i> Contacter</a>
+            <a href="https://wa.me/22670000002" target="_blank" class="btn btn-outline btn-sm"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="offer-card" data-cat="Céréales" data-price="160" data-region="Plateau Central">
+        <div class="offer-card-img">
+          <img src="https://images.unsplash.com/photo-1601593346740-925612772716?w=600&q=80" alt="Maïs">
+          <div style="position:absolute;top:12px;right:12px;"><span class="badge badge-green" style="font-size:.7rem;">Disponible</span></div>
+        </div>
+        <div class="offer-card-body">
+          <div class="offer-card-header">
+            <div><span class="badge badge-gold">🌽 Céréales</span><h3 style="margin-top:8px;">Maïs grain</h3></div>
+            <div style="text-align:right;"><div class="price">160 F<span>/kg</span></div></div>
+          </div>
+          <div class="offer-meta">
+            <div class="offer-meta-row"><i class="fa-solid fa-box"></i>Volume : <strong style="margin-left:4px;">10 tonnes</strong></div>
+            <div class="offer-meta-row"><i class="fa-solid fa-location-dot"></i>Koudougou, Boulkiemdé</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-building"></i>Union des Céréaliers</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-calendar"></i>Publié : il y a 3 jours</div>
+          </div>
+          <div class="offer-card-footer">
+            <a href="tel:+22670000003" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;"><i class="fa-solid fa-phone"></i> Contacter</a>
+            <a href="https://wa.me/22670000003" target="_blank" class="btn btn-outline btn-sm"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="offer-card" data-cat="Oléagineux" data-price="900" data-region="Boucle du Mouhoun">
+        <div class="offer-card-img">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Sésame">
+          <div style="position:absolute;top:12px;right:12px;"><span class="badge badge-green" style="font-size:.7rem;">Disponible</span></div>
+        </div>
+        <div class="offer-card-body">
+          <div class="offer-card-header">
+            <div><span class="badge badge-teal">🌻 Oléagineux</span><h3 style="margin-top:8px;">Sésame blanc</h3></div>
+            <div style="text-align:right;"><div class="price">900 F<span>/kg</span></div></div>
+          </div>
+          <div class="offer-meta">
+            <div class="offer-meta-row"><i class="fa-solid fa-box"></i>Volume : <strong style="margin-left:4px;">5 tonnes</strong></div>
+            <div class="offer-meta-row"><i class="fa-solid fa-location-dot"></i>Dédougou, Mouhoun</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-building"></i>Groupement Sésame Burkina</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-calendar"></i>Publié : il y a 1 semaine</div>
+          </div>
+          <div class="offer-card-footer">
+            <a href="tel:+22670000004" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;"><i class="fa-solid fa-phone"></i> Contacter</a>
+            <a href="https://wa.me/22670000004" target="_blank" class="btn btn-outline btn-sm"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="offer-card" data-cat="Maraîchage" data-price="300" data-region="Centre-Sud">
+        <div class="offer-card-img">
+          <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=600&q=80" alt="Oignons">
+          <div style="position:absolute;top:12px;right:12px;"><span class="badge badge-green" style="font-size:.7rem;">Disponible</span></div>
+        </div>
+        <div class="offer-card-body">
+          <div class="offer-card-header">
+            <div><span class="badge badge-purple">🧅 Maraîchage</span><h3 style="margin-top:8px;">Oignons rouges</h3></div>
+            <div style="text-align:right;"><div class="price">300 F<span>/kg</span></div></div>
+          </div>
+          <div class="offer-meta">
+            <div class="offer-meta-row"><i class="fa-solid fa-box"></i>Volume : <strong style="margin-left:4px;">3 tonnes</strong></div>
+            <div class="offer-meta-row"><i class="fa-solid fa-location-dot"></i>Léo, Sissili</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-building"></i>Coop. Légumes du Sud</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-calendar"></i>Publié : il y a 5 jours</div>
+          </div>
+          <div class="offer-card-footer">
+            <a href="tel:+22670000005" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;"><i class="fa-solid fa-phone"></i> Contacter</a>
+            <a href="https://wa.me/22670000005" target="_blank" class="btn btn-outline btn-sm"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="offer-card" data-cat="Céréales" data-price="140" data-region="Nord">
+        <div class="offer-card-img">
+          <img src="https://images.unsplash.com/photo-1609150448989-1ad5d0a001b5?w=600&q=80" alt="Mil Sorgho">
+          <div style="position:absolute;top:12px;right:12px;"><span class="badge badge-green" style="font-size:.7rem;">Disponible</span></div>
+        </div>
+        <div class="offer-card-body">
+          <div class="offer-card-header">
+            <div><span class="badge badge-gold">🌾 Céréales</span><h3 style="margin-top:8px;">Mil / Sorgho</h3></div>
+            <div style="text-align:right;"><div class="price">140 F<span>/kg</span></div></div>
+          </div>
+          <div class="offer-meta">
+            <div class="offer-meta-row"><i class="fa-solid fa-box"></i>Volume : <strong style="margin-left:4px;">8 tonnes</strong></div>
+            <div class="offer-meta-row"><i class="fa-solid fa-location-dot"></i>Ouahigouya, Yatenga</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-building"></i>UGCPA du Nord</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-calendar"></i>Publié : il y a 4 jours</div>
+          </div>
+          <div class="offer-card-footer">
+            <a href="tel:+22670000006" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;"><i class="fa-solid fa-phone"></i> Contacter</a>
+            <a href="https://wa.me/22670000006" target="_blank" class="btn btn-outline btn-sm"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="offer-card" data-cat="Fruits" data-price="400" data-region="Hauts-Bassins">
+        <div class="offer-card-img">
+          <img src="https://images.unsplash.com/photo-1519096845289-95806ee03a1a?w=600&q=80" alt="Mangues">
+          <div style="position:absolute;top:12px;right:12px;"><span class="badge badge-green" style="font-size:.7rem;">Disponible</span></div>
+        </div>
+        <div class="offer-card-body">
+          <div class="offer-card-header">
+            <div><span class="badge badge-red">🥭 Fruits</span><h3 style="margin-top:8px;">Mangues Kent</h3></div>
+            <div style="text-align:right;"><div class="price">400 F<span>/kg</span></div></div>
+          </div>
+          <div class="offer-meta">
+            <div class="offer-meta-row"><i class="fa-solid fa-box"></i>Volume : <strong style="margin-left:4px;">4 tonnes</strong></div>
+            <div class="offer-meta-row"><i class="fa-solid fa-location-dot"></i>Banfora, Comoé</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-building"></i>Groupement Fruitier</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-calendar"></i>Publié : aujourd'hui</div>
+          </div>
+          <div class="offer-card-footer">
+            <a href="tel:+22670000008" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;"><i class="fa-solid fa-phone"></i> Contacter</a>
+            <a href="https://wa.me/22670000008" target="_blank" class="btn btn-outline btn-sm"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="offer-card" data-cat="Oléagineux" data-price="750" data-region="Centre-Ouest">
+        <div class="offer-card-img">
+          <img src="https://images.unsplash.com/photo-1567653418876-5bb0e566e1c2?w=600&q=80" alt="Arachide">
+          <div style="position:absolute;top:12px;right:12px;"><span class="badge badge-green" style="font-size:.7rem;">Disponible</span></div>
+        </div>
+        <div class="offer-card-body">
+          <div class="offer-card-header">
+            <div><span class="badge badge-gold">🥜 Oléagineux</span><h3 style="margin-top:8px;">Arachide décortiquée</h3></div>
+            <div style="text-align:right;"><div class="price">750 F<span>/kg</span></div></div>
+          </div>
+          <div class="offer-meta">
+            <div class="offer-meta-row"><i class="fa-solid fa-box"></i>Volume : <strong style="margin-left:4px;">6 tonnes</strong></div>
+            <div class="offer-meta-row"><i class="fa-solid fa-location-dot"></i>Réo, Sanguié</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-building"></i>Producteurs d'Arachide</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-calendar"></i>Publié : il y a 2 jours</div>
+          </div>
+          <div class="offer-card-footer">
+            <a href="tel:+22670000010" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;"><i class="fa-solid fa-phone"></i> Contacter</a>
+            <a href="https://wa.me/22670000010" target="_blank" class="btn btn-outline btn-sm"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="offer-card" data-cat="Élevage" data-price="2500" data-region="Sahel">
+        <div class="offer-card-img">
+          <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=600&q=80" alt="Bovins">
+          <div style="position:absolute;top:12px;right:12px;"><span class="badge badge-green" style="font-size:.7rem;">Disponible</span></div>
+        </div>
+        <div class="offer-card-body">
+          <div class="offer-card-header">
+            <div><span class="badge badge-teal">🐄 Élevage</span><h3 style="margin-top:8px;">Bovins (taurillons)</h3></div>
+            <div style="text-align:right;"><div class="price">2 500 F<span>/kg</span></div></div>
+          </div>
+          <div class="offer-meta">
+            <div class="offer-meta-row"><i class="fa-solid fa-box"></i>Volume : <strong style="margin-left:4px;">20 têtes</strong></div>
+            <div class="offer-meta-row"><i class="fa-solid fa-location-dot"></i>Dori, Séno</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-building"></i>Éleveurs du Sahel</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-calendar"></i>Publié : il y a 1 semaine</div>
+          </div>
+          <div class="offer-card-footer">
+            <a href="tel:+22670000009" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;"><i class="fa-solid fa-phone"></i> Contacter</a>
+            <a href="https://wa.me/22670000009" target="_blank" class="btn btn-outline btn-sm"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="offer-card" data-cat="Volaille" data-price="1800" data-region="Est">
+        <div class="offer-card-img">
+          <img src="https://images.unsplash.com/photo-1612170153139-6f881ff067e0?w=600&q=80" alt="Pintades">
+          <div style="position:absolute;top:12px;right:12px;"><span class="badge badge-green" style="font-size:.7rem;">Disponible</span></div>
+        </div>
+        <div class="offer-card-body">
+          <div class="offer-card-header">
+            <div><span class="badge badge-orange">🐔 Volaille</span><h3 style="margin-top:8px;">Pintades locales</h3></div>
+            <div style="text-align:right;"><div class="price">1 800 F<span>/kg</span></div></div>
+          </div>
+          <div class="offer-meta">
+            <div class="offer-meta-row"><i class="fa-solid fa-box"></i>Volume : <strong style="margin-left:4px;">300 kg</strong></div>
+            <div class="offer-meta-row"><i class="fa-solid fa-location-dot"></i>Fada N'Gourma, Gourma</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-building"></i>Aviculteurs de l'Est</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-calendar"></i>Publié : il y a 3 jours</div>
+          </div>
+          <div class="offer-card-footer">
+            <a href="tel:+22670000007" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;"><i class="fa-solid fa-phone"></i> Contacter</a>
+            <a href="https://wa.me/22670000007" target="_blank" class="btn btn-outline btn-sm"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="offer-card" data-cat="Maraîchage" data-price="250" data-region="Centre">
+        <div class="offer-card-img">
+          <img src="https://images.unsplash.com/photo-1543168256-418811576931?w=600&q=80" alt="Légumes variés">
+          <div style="position:absolute;top:12px;right:12px;"><span class="badge badge-green" style="font-size:.7rem;">Disponible</span></div>
+        </div>
+        <div class="offer-card-body">
+          <div class="offer-card-header">
+            <div><span class="badge badge-green">🥦 Maraîchage</span><h3 style="margin-top:8px;">Légumes variés</h3></div>
+            <div style="text-align:right;"><div class="price">250 F<span>/kg</span></div></div>
+          </div>
+          <div class="offer-meta">
+            <div class="offer-meta-row"><i class="fa-solid fa-box"></i>Volume : <strong style="margin-left:4px;">1,5 tonne</strong></div>
+            <div class="offer-meta-row"><i class="fa-solid fa-location-dot"></i>Ouagadougou, Kadiogo</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-building"></i>Jardins Verts de Ouaga</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-calendar"></i>Publié : aujourd'hui</div>
+          </div>
+          <div class="offer-card-footer">
+            <a href="tel:+22670000011" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;"><i class="fa-solid fa-phone"></i> Contacter</a>
+            <a href="https://wa.me/22670000011" target="_blank" class="btn btn-outline btn-sm"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="offer-card" data-cat="Céréales" data-price="155" data-region="Est">
+        <div class="offer-card-img">
+          <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6962b3?w=600&q=80" alt="Sorgho">
+          <div style="position:absolute;top:12px;right:12px;"><span class="badge badge-green" style="font-size:.7rem;">Disponible</span></div>
+        </div>
+        <div class="offer-card-body">
+          <div class="offer-card-header">
+            <div><span class="badge badge-gold">🌽 Céréales</span><h3 style="margin-top:8px;">Sorgho rouge</h3></div>
+            <div style="text-align:right;"><div class="price">155 F<span>/kg</span></div></div>
+          </div>
+          <div class="offer-meta">
+            <div class="offer-meta-row"><i class="fa-solid fa-box"></i>Volume : <strong style="margin-left:4px;">12 tonnes</strong></div>
+            <div class="offer-meta-row"><i class="fa-solid fa-location-dot"></i>Diapaga, Tapoa</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-building"></i>Céréaliers de l'Est</div>
+            <div class="offer-meta-row"><i class="fa-solid fa-calendar"></i>Publié : il y a 6 jours</div>
+          </div>
+          <div class="offer-card-footer">
+            <a href="tel:+22670000012" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;"><i class="fa-solid fa-phone"></i> Contacter</a>
+            <a href="https://wa.me/22670000012" target="_blank" class="btn btn-outline btn-sm"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /grid -->
+
+    <div id="marcheEmpty" class="empty-state" style="display:none;">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <p>Aucune offre ne correspond à vos critères.</p>
+      <button class="btn btn-outline" style="margin-top:12px;" onclick="clearMarcheFilters()">Effacer les filtres</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo navbar-brand">
+          <div class="navbar-logo">T</div>
+          <span class="navbar-name">Tond<span>link</span></span>
+        </div>
+        <p class="footer-desc">Tondlink connecte les producteurs agricoles, coopératives et acheteurs professionnels au Burkina Faso.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="producteurs.html">Producteurs</a></li>
+          <li><a href="acheteurs.html">Acheteurs</a></li>
+          <li><a href="marche.html">Marché</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Filières</h4>
+        <ul>
+          <li><a href="#">Volaille</a></li>
+          <li><a href="#">Céréales</a></li>
+          <li><a href="#">Maraîchage</a></li>
+          <li><a href="#">Oléagineux</a></li>
+          <li><a href="#">Fruits</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item"><i class="fa-solid fa-location-dot"></i><span>Ouagadougou, Burkina Faso</span></div>
+        <div class="footer-contact-item"><i class="fa-solid fa-phone"></i><span>+226 70 00 00 00</span></div>
+        <div class="footer-contact-item"><i class="fa-brands fa-whatsapp"></i><span>+226 70 00 00 00</span></div>
+        <div class="footer-contact-item"><i class="fa-solid fa-envelope"></i><span>contact@tondlink.bf</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Tondlink — Tous droits réservés</span>
+      <div style="display:flex; gap:16px;"><a href="#">Mentions légales</a><a href="#">Confidentialité</a></div>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"><i class="fa-solid fa-circle-check"></i><span id="toastMsg"></span></div>
+
+<style>
+.offer-card-img { position: relative; }
+</style>
+
+<script src="app.js"></script>
+</body>
+</html>
