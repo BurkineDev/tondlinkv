@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FasoMarket — Acheteur — Tondlink</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .need-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px; transition: var(--transition);
+    }
+    .need-card:hover { border-color: var(--green); box-shadow: var(--shadow-sm); }
+    .need-icon { font-size: 2rem; margin-bottom: 10px; }
+    .volume-bar-wrap { background: var(--sand); border-radius: 100px; height: 8px; overflow: hidden; margin-top: 6px; }
+    .volume-bar { height: 8px; border-radius: 100px; background: linear-gradient(90deg, var(--green-light), var(--green)); }
+    .freq-badge { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 100px; font-size: .75rem; font-weight: 600; }
+    .freq-badge.weekly { background: #E8F5E9; color: #2D7A3A; }
+    .freq-badge.monthly { background: #FFF3E0; color: #E65100; }
+    .freq-badge.seasonal { background: #E3F2FD; color: #1565C0; }
+    .review-row { display: flex; gap: 14px; align-items: flex-start; padding: 18px 0; border-bottom: 1px solid var(--border); }
+    .review-row:last-child { border-bottom: none; }
+    .review-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--green); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .9rem; flex-shrink: 0; }
+    @media (max-width: 768px) { #detailLayout { grid-template-columns: 1fr !important; } }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="container navbar-inner">
+    <a href="index.html" class="navbar-brand">
+      <div class="navbar-logo">T</div>
+      <span class="navbar-name">Tond<span>link</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="producteurs.html">Producteurs</a></li>
+      <li><a href="acheteurs.html" class="active">Transformateurs</a></li>
+      <li><a href="marche.html">Marché</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <a href="acheteurs.html" class="btn btn-outline btn-sm">Je suis acheteur</a>
+      <a href="producteurs.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-seedling"></i> Je suis producteur</a>
+      <button class="hamburger" id="menuToggle"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-panel">
+    <button class="mobile-nav-close" id="navClose"><i class="fa-solid fa-xmark"></i></button>
+    <div style="height:48px;"></div>
+    <a href="index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+    <a href="producteurs.html"><i class="fa-solid fa-wheat-awn"></i> Producteurs</a>
+    <a href="acheteurs.html" class="active"><i class="fa-solid fa-industry"></i> Acheteurs</a>
+    <a href="marche.html"><i class="fa-solid fa-shop"></i> Marché</a>
+    <a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a>
+  </div>
+</div>
+
+<!-- DETAIL HERO -->
+<div class="detail-hero" style="background:linear-gradient(135deg,#1565C0,#1976D2);">
+  <div class="detail-hero-img" style="background-image:url('https://images.unsplash.com/photo-1542838132-92c53300491e?w=1600&q=80');"></div>
+  <div class="container detail-hero-content">
+    <div style="display:flex; align-items:center; gap:10px; color:rgba(255,255,255,.6); font-size:.82rem; margin-bottom:20px;">
+      <a href="index.html" style="color:rgba(255,255,255,.6);">Accueil</a>
+      <i class="fa-solid fa-chevron-right" style="font-size:.6rem;"></i>
+      <a href="acheteurs.html" style="color:rgba(255,255,255,.6);">Acheteurs</a>
+      <i class="fa-solid fa-chevron-right" style="font-size:.6rem;"></i>
+      <span style="color:white;">FasoMarket SARL</span>
+    </div>
+    <div style="display:flex; align-items:flex-start; gap:20px; flex-wrap:wrap;">
+      <div style="width:80px; height:80px; border-radius:18px; background:white; display:flex; align-items:center; justify-content:center; font-size:2.5rem; flex-shrink:0; box-shadow:var(--shadow);">
+        🏪
+      </div>
+      <div style="flex:1; min-width:0;">
+        <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:8px;">
+          <h1 style="color:white; margin-bottom:0;">FasoMarket SARL</h1>
+          <span class="badge badge-green"><i class="fa-solid fa-circle-check"></i> Vérifié</span>
+          <span class="badge" style="background:rgba(255,255,255,.15); color:white;">
+            <i class="fa-solid fa-star" style="color:var(--gold);"></i> 4.8 / 5
+          </span>
+        </div>
+        <p style="color:rgba(255,255,255,.78); font-size:.95rem; margin-bottom:14px;">
+          Grossiste agro-alimentaire spécialisé dans la distribution de produits frais et céréaliers.
+          Approvisionne hôtels, restaurants et grandes surfaces à Ouagadougou.
+        </p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <span class="badge badge-orange">🏪 Grossiste</span>
+          <span class="badge" style="background:rgba(255,255,255,.15); color:white;">
+            <i class="fa-solid fa-location-dot"></i> Ouagadougou, Centre
+          </span>
+          <span class="badge" style="background:rgba(255,255,255,.15); color:white;">
+            <i class="fa-solid fa-users"></i> ~30 employés
+          </span>
+          <span class="badge" style="background:rgba(255,255,255,.15); color:white;">
+            <i class="fa-solid fa-calendar"></i> Depuis 2018
+          </span>
+        </div>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:4px;">
+        <a href="tel:+22670000010" class="btn btn-gold"><i class="fa-solid fa-phone"></i> Appeler</a>
+        <a href="https://wa.me/22670000010" target="_blank" class="btn btn-outline-white"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUICK STATS -->
+<div style="background:var(--white); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="detail-meta-grid">
+      <div class="detail-meta-item">
+        <div class="label">Budget mensuel</div>
+        <div class="value" style="color:#1565C0;">5–10 M FCFA</div>
+      </div>
+      <div class="detail-meta-item">
+        <div class="label">Filières recherchées</div>
+        <div class="value">6 filières</div>
+      </div>
+      <div class="detail-meta-item">
+        <div class="label">Partenaire depuis</div>
+        <div class="value">2020</div>
+      </div>
+      <div class="detail-meta-item">
+        <div class="label">Zone d'achat</div>
+        <div class="value">National</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<div style="background:var(--white); position:sticky; top:68px; z-index:99; border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="tab-nav">
+      <button class="tab-nav-btn active" onclick="showTab('presentation', this)">
+        <i class="fa-solid fa-info-circle"></i> Présentation
+      </button>
+      <button class="tab-nav-btn" onclick="showTab('besoins', this)">
+        <i class="fa-solid fa-cart-shopping"></i> Besoins en approvisionnement
+      </button>
+      <button class="tab-nav-btn" onclick="showTab('contact', this)">
+        <i class="fa-solid fa-phone"></i> Contact
+      </button>
+      <button class="tab-nav-btn" onclick="showTab('avis', this)">
+        <i class="fa-solid fa-star"></i> Avis (4)
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- TAB CONTENT -->
+<section class="section">
+  <div class="container">
+    <div style="display:grid; grid-template-columns:1fr 320px; gap:36px; align-items:start;" id="detailLayout">
+
+      <!-- LEFT -->
+      <div>
+
+        <!-- PRESENTATION -->
+        <div class="tab-panel active" id="tab-presentation">
+          <h2 style="margin-bottom:14px;">À propos de FasoMarket</h2>
+          <p class="text-mid" style="line-height:1.8; margin-bottom:16px;">
+            FasoMarket SARL est une entreprise de distribution agro-alimentaire créée en 2018 à
+            Ouagadougou. Elle approvisionne plus de 80 points de vente (hôtels, restaurants,
+            cantines d'entreprises et grandes surfaces) en produits frais, céréales et produits
+            transformés.
+          </p>
+          <p class="text-mid" style="line-height:1.8; margin-bottom:16px;">
+            Partenaire Tondlink depuis 2020, FasoMarket recherche en permanence des fournisseurs
+            réguliers et fiables pour sécuriser son approvisionnement. L'entreprise valorise les
+            relations directes avec les coopératives pour réduire les intermédiaires.
+          </p>
+          <p class="text-mid" style="line-height:1.8;">
+            Elle dispose d'un entrepôt frigorifique de 200 m² et d'une flotte de 4 véhicules de
+            livraison. Paiement en général sous 15 jours ou comptant selon les accords négociés.
+          </p>
+
+          <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:28px; margin-bottom:28px;">
+            <div style="display:flex; gap:12px; align-items:flex-start; padding:16px; background:#EFF8FF; border-radius:var(--radius-sm);">
+              <div style="font-size:1.4rem;">❄️</div>
+              <div><div style="font-weight:600; font-size:.88rem; margin-bottom:4px;">Stockage frigorifique</div><div style="font-size:.82rem; color:var(--text-mid);">200 m² de capacité</div></div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start; padding:16px; background:#EFF8FF; border-radius:var(--radius-sm);">
+              <div style="font-size:1.4rem;">🚛</div>
+              <div><div style="font-weight:600; font-size:.88rem; margin-bottom:4px;">Flotte propre</div><div style="font-size:.82rem; color:var(--text-mid);">4 véhicules de livraison</div></div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start; padding:16px; background:#EFF8FF; border-radius:var(--radius-sm);">
+              <div style="font-size:1.4rem;">💳</div>
+              <div><div style="font-weight:600; font-size:.88rem; margin-bottom:4px;">Paiement rapide</div><div style="font-size:.82rem; color:var(--text-mid);">Comptant ou à 15 jours</div></div>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start; padding:16px; background:#EFF8FF; border-radius:var(--radius-sm);">
+              <div style="font-size:1.4rem;">📑</div>
+              <div><div style="font-weight:600; font-size:.88rem; margin-bottom:4px;">Contrats annuels</div><div style="font-size:.82rem; color:var(--text-mid);">Préférence pour l'approvisionnement régulier</div></div>
+            </div>
+          </div>
+
+          <!-- Galerie -->
+          <h3 style="margin-bottom:16px;">Galerie</h3>
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px;">
+            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&q=75" alt="Marché" style="border-radius:var(--radius-sm); height:120px; object-fit:cover; width:100%; cursor:pointer;" onclick="openLightbox(this.src)">
+            <img src="https://images.unsplash.com/photo-1506617564039-2f3b650b7010?w=400&q=75" alt="Stockage" style="border-radius:var(--radius-sm); height:120px; object-fit:cover; width:100%; cursor:pointer;" onclick="openLightbox(this.src)">
+            <img src="https://images.unsplash.com/photo-1580912534301-ab03ae5a6219?w=400&q=75" alt="Distribution" style="border-radius:var(--radius-sm); height:120px; object-fit:cover; width:100%; cursor:pointer;" onclick="openLightbox(this.src)">
+          </div>
+        </div>
+
+        <!-- BESOINS -->
+        <div class="tab-panel" id="tab-besoins">
+          <h2 style="margin-bottom:8px;">Besoins en approvisionnement</h2>
+          <p class="text-mid" style="margin-bottom:24px;">
+            Volumes recherchés par filière. Contactez-nous si vous êtes producteur correspondant.
+          </p>
+
+          <div style="display:grid; gap:14px; margin-bottom:28px;">
+
+            <div class="need-card">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+                <div style="display:flex; gap:12px; align-items:center;">
+                  <div class="need-icon">🐔</div>
+                  <div>
+                    <div style="font-weight:700;">Poulet de chair / Pintade</div>
+                    <div style="font-size:.8rem; color:var(--text-light);">Vif ou carcasse, semaine ou quinzaine</div>
+                  </div>
+                </div>
+                <span class="freq-badge weekly"><i class="fa-solid fa-rotate"></i> Hebdomadaire</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:.85rem; margin-bottom:6px;">
+                <span class="text-mid">Volume recherché</span>
+                <span style="font-weight:700; color:#1565C0;">300–500 kg / semaine</span>
+              </div>
+              <div class="volume-bar-wrap"><div class="volume-bar" style="width:75%;"></div></div>
+              <div style="font-size:.78rem; color:var(--text-light); margin-top:6px;">Fournisseurs actuels : 2/3 de l'objectif couvert</div>
+            </div>
+
+            <div class="need-card">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+                <div style="display:flex; gap:12px; align-items:center;">
+                  <div class="need-icon">🌽</div>
+                  <div>
+                    <div style="font-weight:700;">Maïs grain</div>
+                    <div style="font-size:.8rem; color:var(--text-light);">Sec, bien calibré, ensaché 50 kg</div>
+                  </div>
+                </div>
+                <span class="freq-badge monthly"><i class="fa-solid fa-rotate"></i> Mensuel</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:.85rem; margin-bottom:6px;">
+                <span class="text-mid">Volume recherché</span>
+                <span style="font-weight:700; color:#1565C0;">5 tonnes / mois</span>
+              </div>
+              <div class="volume-bar-wrap"><div class="volume-bar" style="width:50%;"></div></div>
+              <div style="font-size:.78rem; color:var(--text-light); margin-top:6px;">Besoin partiellement couvert — Recherche actives</div>
+            </div>
+
+            <div class="need-card">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+                <div style="display:flex; gap:12px; align-items:center;">
+                  <div class="need-icon">🥬</div>
+                  <div>
+                    <div style="font-weight:700;">Légumes frais (tomate, oignon, chou)</div>
+                    <div style="font-size:.8rem; color:var(--text-light);">Selon saison, frais, sans pesticides excessifs</div>
+                  </div>
+                </div>
+                <span class="freq-badge weekly"><i class="fa-solid fa-rotate"></i> Bihebdomadaire</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:.85rem; margin-bottom:6px;">
+                <span class="text-mid">Volume recherché</span>
+                <span style="font-weight:700; color:#1565C0;">1–2 tonnes / semaine</span>
+              </div>
+              <div class="volume-bar-wrap"><div class="volume-bar" style="width:60%;"></div></div>
+              <div style="font-size:.78rem; color:var(--text-light); margin-top:6px;">Plusieurs fournisseurs actifs — toujours ouvert</div>
+            </div>
+
+            <div class="need-card">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+                <div style="display:flex; gap:12px; align-items:center;">
+                  <div class="need-icon">🥚</div>
+                  <div>
+                    <div style="font-weight:700;">Œufs de consommation</div>
+                    <div style="font-size:.8rem; color:var(--text-light);">Plateau 30 œufs, calibre moyen/grand</div>
+                  </div>
+                </div>
+                <span class="freq-badge weekly"><i class="fa-solid fa-rotate"></i> Hebdomadaire</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:.85rem; margin-bottom:6px;">
+                <span class="text-mid">Volume recherché</span>
+                <span style="font-weight:700; color:#1565C0;">200 plateaux / semaine</span>
+              </div>
+              <div class="volume-bar-wrap"><div class="volume-bar" style="width:90%; background:linear-gradient(90deg,#4CAF50,#2E7D32);"></div></div>
+              <div style="font-size:.78rem; color:var(--text-light); margin-top:6px;">Besoin bien couvert — 1 fournisseur supplémentaire bienvenu</div>
+            </div>
+
+          </div>
+
+          <div style="background:linear-gradient(135deg, #EFF8FF, #DBEAFE); border:1px solid #BFDBFE; border-radius:var(--radius); padding:20px;">
+            <div style="display:flex; gap:12px; align-items:flex-start;">
+              <span style="font-size:1.8rem;">💡</span>
+              <div>
+                <div style="font-weight:700; margin-bottom:6px; color:#1565C0;">Vous pouvez fournir FasoMarket ?</div>
+                <p style="font-size:.88rem; color:var(--text-mid); margin-bottom:12px;">
+                  Si votre coopérative peut répondre à l'un de ces besoins, contactez-les directement
+                  ou passez par Tondlink pour faciliter la mise en relation.
+                </p>
+                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                  <a href="tel:+22670000010" class="btn btn-sm" style="background:#1565C0; color:white; border-color:#1565C0;">
+                    <i class="fa-solid fa-phone"></i> Appeler
+                  </a>
+                  <a href="contact.html" class="btn btn-outline btn-sm">
+                    <i class="fa-solid fa-envelope"></i> Via Tondlink
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONTACT -->
+        <div class="tab-panel" id="tab-contact">
+          <h2 style="margin-bottom:20px;">Coordonnées</h2>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:28px;">
+            <div class="contact-info-card">
+              <div class="contact-info-icon" style="background:#EFF8FF; color:#1565C0;"><i class="fa-solid fa-user-tie"></i></div>
+              <div><div class="fw-600">Responsable achats</div><div class="text-mid text-sm">Awa Sawadogo</div></div>
+            </div>
+            <div class="contact-info-card">
+              <div class="contact-info-icon" style="background:#EFF8FF; color:#1565C0;"><i class="fa-solid fa-phone"></i></div>
+              <div><div class="fw-600">Téléphone</div><a href="tel:+22670000010" style="color:#1565C0; font-size:.9rem;">+226 70 00 00 10</a></div>
+            </div>
+            <div class="contact-info-card">
+              <div class="contact-info-icon" style="background:#E7F9ED; color:#25D366;"><i class="fa-brands fa-whatsapp"></i></div>
+              <div><div class="fw-600">WhatsApp</div><a href="https://wa.me/22670000010" target="_blank" style="color:#25D366; font-size:.9rem;">+226 70 00 00 10</a></div>
+            </div>
+            <div class="contact-info-card">
+              <div class="contact-info-icon" style="background:#EFF8FF; color:#1565C0;"><i class="fa-solid fa-envelope"></i></div>
+              <div><div class="fw-600">Email</div><div class="text-mid text-sm">contact@fasomarket.bf</div></div>
+            </div>
+            <div class="contact-info-card" style="grid-column:span 2;">
+              <div class="contact-info-icon" style="background:#EFF8FF; color:#1565C0;"><i class="fa-solid fa-location-dot"></i></div>
+              <div><div class="fw-600">Adresse</div><div class="text-mid text-sm">Zone du Bois, Avenue Kwamé N'Krumah, Ouagadougou</div></div>
+            </div>
+          </div>
+          <div style="background:var(--green-pale); border-radius:var(--radius); padding:20px; border:1px solid rgba(45,122,58,.2);">
+            <div style="display:flex; gap:12px;">
+              <div style="font-size:1.8rem;">🤝</div>
+              <div>
+                <div style="font-weight:700; color:var(--green-dark); margin-bottom:6px;">Mise en relation via Tondlink</div>
+                <p style="font-size:.88rem; color:var(--text-mid); margin-bottom:12px;">Vous êtes producteur et souhaitez fournir FasoMarket ? Notre équipe facilite le premier contact.</p>
+                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                  <a href="tel:+22670000000" class="btn btn-primary btn-sm"><i class="fa-solid fa-phone"></i> Tondlink : +226 70 00 00 00</a>
+                  <a href="https://wa.me/22670000000" target="_blank" class="btn btn-outline btn-sm"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AVIS -->
+        <div class="tab-panel" id="tab-avis">
+          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:28px;">
+            <div>
+              <h2 style="margin-bottom:4px;">Avis des fournisseurs</h2>
+              <p class="text-mid text-sm">4 avis de producteurs partenaires</p>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:3rem; font-weight:800; color:var(--text-dark); line-height:1;">4.8</div>
+              <div style="color:var(--gold); font-size:1rem; margin:4px 0;">★★★★★</div>
+              <div style="font-size:.78rem; color:var(--text-light);">sur 5</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="review-row">
+              <div class="review-avatar">MK</div>
+              <div style="flex:1;">
+                <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:6px;">
+                  <div>
+                    <div style="font-weight:600; font-size:.9rem;">Moussa Kaboré</div>
+                    <div style="font-size:.75rem; color:var(--text-light);">Coop. Avicole du Centre — Mars 2025</div>
+                  </div>
+                  <div style="color:var(--gold); font-size:.85rem;">★★★★★</div>
+                </div>
+                <p style="font-size:.88rem; color:var(--text-mid); line-height:1.6;">Paiement toujours dans les délais. Awa est très réactive et les commandes sont claires. On travaille avec eux depuis 2 ans sans problème.</p>
+              </div>
+            </div>
+
+            <div class="review-row">
+              <div class="review-avatar" style="background:var(--gold);">SF</div>
+              <div style="flex:1;">
+                <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:6px;">
+                  <div>
+                    <div style="font-weight:600; font-size:.9rem;">Safiatou Fofana</div>
+                    <div style="font-size:.75rem; color:var(--text-light);">Maraîchers du Sahel — Janvier 2025</div>
+                  </div>
+                  <div style="color:var(--gold); font-size:.85rem;">★★★★★</div>
+                </div>
+                <p style="font-size:.88rem; color:var(--text-mid); line-height:1.6;">Volumes stables et planifiés à l'avance. Cela nous aide à organiser notre production. Très professionnels.</p>
+              </div>
+            </div>
+
+            <div class="review-row">
+              <div class="review-avatar" style="background:#7B1FA2;">AB</div>
+              <div style="flex:1;">
+                <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:6px;">
+                  <div>
+                    <div style="font-weight:600; font-size:.9rem;">Adama Barro</div>
+                    <div style="font-size:.75rem; color:var(--text-light);">Coop. Céréalière du Nord — Nov. 2024</div>
+                  </div>
+                  <div style="color:var(--gold); font-size:.85rem;">★★★★☆</div>
+                </div>
+                <p style="font-size:.88rem; color:var(--text-mid); line-height:1.6;">Bonne collaboration. Les prix négociés sont justes. Parfois les bons de commande arrivent en retard mais dans l'ensemble très satisfait.</p>
+              </div>
+            </div>
+
+            <div class="review-row">
+              <div class="review-avatar" style="background:#00695C;">IT</div>
+              <div style="flex:1;">
+                <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:6px;">
+                  <div>
+                    <div style="font-weight:600; font-size:.9rem;">Issouf Traoré</div>
+                    <div style="font-size:.75rem; color:var(--text-light);">Groupement avicole Est — Sept. 2024</div>
+                  </div>
+                  <div style="color:var(--gold); font-size:.85rem;">★★★★★</div>
+                </div>
+                <p style="font-size:.88rem; color:var(--text-mid); line-height:1.6;">FasoMarket respecte ses engagements. On a conclu un contrat annuel grâce à Tondlink et ça se passe très bien.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SIDEBAR -->
+      <div style="position:sticky; top:120px;">
+        <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius); padding:22px; margin-bottom:16px; box-shadow:var(--shadow-sm);">
+          <div style="font-weight:700; margin-bottom:16px; font-size:1rem;">Contacter FasoMarket</div>
+          <a href="tel:+22670000010" class="btn" style="width:100%; justify-content:center; margin-bottom:10px; background:#1565C0; color:white; border-color:#1565C0;">
+            <i class="fa-solid fa-phone"></i> Appeler maintenant
+          </a>
+          <a href="https://wa.me/22670000010?text=Bonjour%2C%20je%20vous%20contacte%20via%20Tondlink%20pour%20vous%20proposer%20mes%20produits." target="_blank" class="btn" style="width:100%; justify-content:center; background:#25D366; color:white; border-color:#25D366; margin-bottom:10px;">
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp
+          </a>
+          <a href="contact.html" class="btn btn-outline" style="width:100%; justify-content:center;">
+            <i class="fa-solid fa-envelope"></i> Via Tondlink
+          </a>
+          <div style="margin-top:16px; padding-top:16px; border-top:1px solid var(--border);">
+            <div style="font-size:.78rem; font-weight:600; color:var(--text-light); text-transform:uppercase; letter-spacing:.05em; margin-bottom:10px;">Meilleurs horaires</div>
+            <div style="font-size:.83rem; color:var(--text-mid); margin-bottom:4px;">Lundi – Vendredi : 7h30 – 17h00</div>
+            <div style="font-size:.83rem; color:var(--text-mid);">Samedi : 8h00 – 13h00</div>
+          </div>
+        </div>
+
+        <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius); padding:18px; margin-bottom:16px;">
+          <div style="font-weight:700; margin-bottom:14px; font-size:.92rem;">Profil acheteur</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:.83rem; color:var(--text-mid);">Type</span>
+              <span class="badge badge-orange">🏪 Grossiste</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:.83rem; color:var(--text-mid);">Partenaire depuis</span>
+              <span style="font-weight:600; font-size:.88rem;">2020</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:.83rem; color:var(--text-mid);">Budget/mois</span>
+              <span style="font-weight:600; font-size:.88rem; color:#1565C0;">5–10 M FCFA</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:.83rem; color:var(--text-mid);">Paiement</span>
+              <span style="font-weight:600; font-size:.88rem;">Comptant / J+15</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:.83rem; color:var(--text-mid);">Note</span>
+              <span class="badge badge-green"><i class="fa-solid fa-star"></i> 4.8 / 5</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Acheteurs similaires -->
+        <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius); padding:18px;">
+          <div style="font-weight:700; margin-bottom:14px; font-size:.92rem;">Acheteurs similaires</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <a href="#" style="display:flex; gap:10px; align-items:center; padding:10px; border-radius:var(--radius-sm); border:1px solid var(--border); transition:var(--transition);" onmouseover="this.style.borderColor='#1565C0'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size:1.4rem;">🏭</div>
+              <div><div style="font-weight:600; font-size:.85rem;">BF Agro-Industries</div><div style="font-size:.75rem; color:var(--text-light);">Bobo-Dioulasso · Transformateur</div></div>
+            </a>
+            <a href="#" style="display:flex; gap:10px; align-items:center; padding:10px; border-radius:var(--radius-sm); border:1px solid var(--border); transition:var(--transition);" onmouseover="this.style.borderColor='#1565C0'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size:1.4rem;">🍽️</div>
+              <div><div style="font-weight:600; font-size:.85rem;">Chaîne Resto-BF</div><div style="font-size:.75096rem; color:var(--text-light);">Ouagadougou · Restauration</div></div>
+            </a>
+          </div>
+          <a href="acheteurs.html" style="display:block; text-align:center; margin-top:12px; font-size:.82rem; color:#1565C0; font-weight:600;">
+            Voir tous les acheteurs →
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo navbar-brand">
+          <div class="navbar-logo">T</div>
+          <span class="navbar-name">Tond<span>link</span></span>
+        </div>
+        <p class="footer-desc">Tondlink connecte producteurs agricoles, coopératives et acheteurs professionnels au Burkina Faso.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" class="social-btn"><i class="fa-brands fa-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="producteurs.html">Producteurs</a></li>
+          <li><a href="acheteurs.html">Acheteurs</a></li>
+          <li><a href="marche.html">Marché</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Filières</h4>
+        <ul>
+          <li><a href="#">Volaille</a></li>
+          <li><a href="#">Céréales</a></li>
+          <li><a href="#">Maraîchage</a></li>
+          <li><a href="#">Oléagineux</a></li>
+          <li><a href="#">Fruits</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item"><i class="fa-solid fa-location-dot"></i><span>Ouagadougou, Burkina Faso</span></div>
+        <div class="footer-contact-item"><i class="fa-solid fa-phone"></i><span>+226 70 00 00 00</span></div>
+        <div class="footer-contact-item"><i class="fa-brands fa-whatsapp"></i><span>+226 70 00 00 00</span></div>
+        <div class="footer-contact-item"><i class="fa-solid fa-envelope"></i><span>contact@tondlink.bf</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Tondlink — Tous droits réservés</span>
+      <div style="display:flex; gap:16px;"><a href="#">Mentions légales</a><a href="#">Confidentialité</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<div id="lightbox" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.88); z-index:9999; align-items:center; justify-content:center;" onclick="closeLightbox()">
+  <img id="lightboxImg" src="" alt="" style="max-width:90vw; max-height:90vh; border-radius:var(--radius); box-shadow:var(--shadow-lg);">
+  <button onclick="closeLightbox()" style="position:absolute; top:20px; right:20px; background:rgba(255,255,255,.15); border:none; color:white; width:44px; height:44px; border-radius:50%; font-size:1.2rem; cursor:pointer;">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+</div>
+
+<a href="https://wa.me/22670000000" target="_blank" class="wa-float">
+  <i class="fa-brands fa-whatsapp"></i>
+  <span class="wa-tooltip">Contacter Tondlink</span>
+</a>
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fa-solid fa-chevron-up"></i>
+</button>
+<div class="toast" id="toast"><i class="fa-solid fa-circle-check"></i><span id="toastMsg"></span></div>
+
+<style>
+.contact-info-card { display:flex; align-items:flex-start; gap:14px; padding:14px 16px; background:var(--sand); border:1px solid var(--border); border-radius:var(--radius-sm); }
+.contact-info-icon { width:40px; height:40px; border-radius:10px; background:var(--green-pale); color:var(--green); display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
+</style>
+
+<script>
+function showTab(tabId, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tabId).classList.add('active');
+  btn.classList.add('active');
+}
+function openLightbox(src) {
+  document.getElementById('lightbox').style.display = 'flex';
+  document.getElementById('lightboxImg').src = src;
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').style.display = 'none';
+  document.body.style.overflow = '';
+}
+</script>
+<script src="app.js"></script>
+</body>
+</html>
