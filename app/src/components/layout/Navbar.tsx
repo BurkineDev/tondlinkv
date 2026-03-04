@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
-import { Menu, X, Sprout } from 'lucide-react'
+import { Menu, X, Sprout, LogIn } from 'lucide-react'
 import { clsx } from 'clsx'
 
 const links = [
@@ -66,12 +66,19 @@ export default function Navbar() {
 
           {/* Actions */}
           <div className="hidden md:flex items-center gap-2">
-            <Link to="/acheteurs" className="btn-outline text-xs px-4 py-2">
-              Je suis acheteur
+            <Link
+              to="/connexion"
+              className="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors inline-flex items-center gap-1.5"
+            >
+              <LogIn size={14} />
+              Connexion
+            </Link>
+            <Link to="/inscription" className="btn-outline text-xs px-4 py-2">
+              S'inscrire
             </Link>
             <Link to="/rejoindre" className="btn-primary text-xs px-4 py-2">
               <Sprout size={14} />
-              Je suis producteur
+              Rejoindre
             </Link>
           </div>
 
@@ -115,11 +122,11 @@ export default function Navbar() {
               ))}
             </nav>
             <div className="flex flex-col gap-2 pt-4 border-t border-gray-100">
-              <Link to="/rejoindre" onClick={() => setOpen(false)} className="btn-primary justify-center">
-                <Sprout size={15} /> M'inscrire
+              <Link to="/inscription" onClick={() => setOpen(false)} className="btn-primary justify-center">
+                <Sprout size={15} /> S'inscrire
               </Link>
-              <Link to="/contact" onClick={() => setOpen(false)} className="btn-outline justify-center">
-                Nous contacter
+              <Link to="/connexion" onClick={() => setOpen(false)} className="btn-outline justify-center">
+                <LogIn size={15} /> Se connecter
               </Link>
             </div>
           </div>
